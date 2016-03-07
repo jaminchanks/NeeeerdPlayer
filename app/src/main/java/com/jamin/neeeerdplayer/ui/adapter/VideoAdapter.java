@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
+import com.jamin.neeeerdplayer.utils.FooUtils;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,6 @@ public class VideoAdapter extends ArrayAdapter<FooVideo>{
         //从视频中提取相关显示信息
         Bitmap thumbnail = BitmapFactory.decodeFile(fooVideo.getThumbnailPath());
         String displayName = fooVideo.getDisplayName();
-        String duration = DateFormat.format("HH:mm:ss", fooVideo.getDuration()).toString();
         // TODO: 16-3-5 这里暂不处理图像的大小
             String data = fooVideo.getVideoPath();
             viewHolder.videoThumbnail.setImageBitmap(ThumbnailUtils.createVideoThumbnail(data,
@@ -54,7 +54,7 @@ public class VideoAdapter extends ArrayAdapter<FooVideo>{
 //            viewHolder.videoThumbnail.setImageBitmap(thumbnail);
 
         viewHolder.displayNameView.setText(displayName);
-        viewHolder.durationView.setText(duration);
+        viewHolder.durationView.setText(FooUtils.timeFormat(fooVideo.getDuration()));
         return convertView;
     }
 

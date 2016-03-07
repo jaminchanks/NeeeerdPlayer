@@ -28,7 +28,6 @@ public class VideoListFragment extends ListFragment {
 
     public static final String VIDEO_LIST = "video list";
     public static final String SELECTED_VIDEO = "selected Video";
-    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     ArrayList<FooVideo> mVideoList;
@@ -44,27 +43,7 @@ public class VideoListFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
-
-        swipeRefreshLayout = new SwipeRefreshLayout(getActivity());
-        swipeRefreshLayout.addView(view);
-        //设置刷新时动画的颜色，可以设置4个
-        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (swipeRefreshLayout.isRefreshing())
-                            swipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 2000);
-            }
-        });
-
-        return swipeRefreshLayout;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
 

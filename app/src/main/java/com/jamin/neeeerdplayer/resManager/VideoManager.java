@@ -47,12 +47,11 @@ public class VideoManager {
                 String artist = "123";
                 String displayName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DISPLAY_NAME));
                 String videoPath = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA));
-                long duration = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DURATION));
-                long size = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.SIZE));
+                long duration = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DURATION));
+                long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.SIZE));
 //                String thumbnail = queryVideoThumbnail(id);
                 //尚未设置视频的最后播放时间
-//                FooVideo fooVideo = new FooVideo(id, artist, displayName, videoPath, thumbnail, duration, size, 0);
-                FooVideo fooVideo = new FooVideo(id, artist, displayName, videoPath, null, duration, size, 0);
+                FooVideo fooVideo = new FooVideo(id, artist, displayName, videoPath, null, size, duration, 0);
 
                 if (fooVideo.getDuration() > 1000)
                     videos.add(fooVideo);

@@ -18,6 +18,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 
 import com.jamin.neeeerdplayer.R;
@@ -36,8 +40,8 @@ public class FolderListFragment extends ListFragment {
     private static final String FOLDER_LIST = "folder list";
     public static final String SELECTED_FOLDER = "selected folder";
     private SwipeRefreshLayout swipeRefreshLayout;
-    private ArrayList<FooFolder> mFolderlist;
-
+    private ArrayList<FooFolder> mFolderList;
+    private SearchView mSearchView;
     public static FolderListFragment newInstance(ArrayList<FooVideo> fooVideos) {
         Bundle args = new Bundle();
         ArrayList<FooFolder> fooFolders = FooUtils.videoCategoryByFolder(fooVideos);
@@ -52,41 +56,22 @@ public class FolderListFragment extends ListFragment {
         super.onCreate(onSavedInstanceState);
         setHasOptionsMenu(true);
 
-        mFolderlist = (ArrayList<FooFolder>) getArguments().getSerializable(FOLDER_LIST);
+        mFolderList = (ArrayList<FooFolder>) getArguments().getSerializable(FOLDER_LIST);
 
-        setListAdapter(new FolderAdapter(getActivity(), mFolderlist));
+        setListAdapter(new FolderAdapter(getActivity(), mFolderList));
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        getListView().setDivider(null);
+        ListView listView = getListView();
+        listView.setDivider(null);
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
-
-        swipeRefreshLayout = new SwipeRefreshLayout(getActivity());
-        swipeRefreshLayout.addView(view);
-        //设置刷新时动画的颜色，可以设置4个
-        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (swipeRefreshLayout.isRefreshing())
-                            swipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 2000);
-            }
-        });
-
-        return swipeRefreshLayout;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
 
@@ -99,12 +84,34 @@ public class FolderListFragment extends ListFragment {
         //设置actionbar的搜索按钮
         MenuItem searchItem = menu.findItem(R.id.action_search);
         searchItem.setVisible(true).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        SearchView searchView = (SearchView)searchItem.getActionView() ;
+
+        mSearchView = (SearchView)searchItem.getActionView();
         SearchManager searchManager = (SearchManager)getActivity().getSystemService(Context.SEARCH_SERVICE);
         ComponentName name = getActivity().getComponentName();
         SearchableInfo searchableInfo = searchManager.getSearchableInfo(name);
 
-        searchView.setSearchableInfo(searchableInfo);
+        mSearchView.setSearchableInfo(searchableInfo);
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (mSearchView != null) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm != null) {
+                        imm.hideSoftInputFromWindow(
+                                mSearchView.getWindowToken(), 0);
+                    }
+                    mSearchView.clearFocus();
+
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
 
     }

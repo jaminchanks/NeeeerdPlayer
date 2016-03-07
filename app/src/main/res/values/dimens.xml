@@ -20,9 +20,9 @@
 
 
 
-    <!-- 视频缩略图大小 -->
+    <!-- 视频缩略图和字体大小 -->
     <dimen name="video_thumbnail_icon_height">72dp</dimen>
     <dimen name="video_thumbnail_icon_width">96dp</dimen>
     <dimen name="video_duration_font_size">15sp</dimen>
-    <dimen name="video_name_font_size">25sp</dimen>
+    <dimen name="video_name_font_size">16sp</dimen>
 </resources>

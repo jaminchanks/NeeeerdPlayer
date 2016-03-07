@@ -1,5 +1,7 @@
 package com.jamin.neeeerdplayer.utils;
 
+import android.support.annotation.NonNull;
+
 import com.jamin.neeeerdplayer.bean.FooFolder;
 import com.jamin.neeeerdplayer.bean.FooVideo;
 
@@ -39,7 +41,6 @@ public class FooUtils {
                     break;
                 }
             }
-
         }
         return fooFolderList;
     }
@@ -47,6 +48,30 @@ public class FooUtils {
 
     public static String getUpperDirectorName(String path) {
         return path.substring(0, path.lastIndexOf(File.separator) - 1);
+    }
+
+    /**
+     *
+     * @param time 单位为ms
+     * @return  时间格式如： 1:23:45
+     */
+    @NonNull
+    public static String timeFormat(long time) {
+        long timeSeconds = time / 1000;
+        StringBuilder formatTime = new StringBuilder();
+        if ((timeSeconds / 3600) > 0) {
+            long timeHour = timeSeconds / 3600;
+            formatTime.append(timeHour).append(":");    //HH:mm:ss
+        }
+        if ((timeSeconds / 60) > 0) {
+            long timeMinute = timeSeconds % 3600 / 60;
+            formatTime.append((timeMinute > 9 ? "" : "0") + timeMinute).append(":");    //0m:ss
+        } else {
+            formatTime.append("00:");   // 00:ss
+        }
+        formatTime.append(( (timeSeconds % 60)  > 9 ? "" : "0") + timeSeconds % 60);    //mm:0s
+
+        return formatTime.toString();
     }
 
 }
