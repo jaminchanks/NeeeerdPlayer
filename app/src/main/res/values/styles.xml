@@ -17,4 +17,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- 无标题 -->
+    <style name="NoTitleTheme" parent="@style/AppTheme.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    
 </resources>

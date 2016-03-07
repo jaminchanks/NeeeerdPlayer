@@ -22,11 +22,7 @@ public class FooFolder implements Serializable {
 
     //根据视频文件解析其所在文件夹路径
     public String getFolderSimpleName() {
-        String[] paths = videos.get(0).getVideoPath().split(File.separator);
-        if (paths.length >= 2)
-            return paths[paths.length - 2];
-        else
-            return "/";
+       return FooUtils.getSimperUpperDirectorName(videos.get(0).getVideoPath());
     }
 
     public String getFolderName() {

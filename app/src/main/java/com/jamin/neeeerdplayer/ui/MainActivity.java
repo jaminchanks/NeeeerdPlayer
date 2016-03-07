@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
         if (null == mCurrentFragment) {
             //// TODO: 16-3-6 改变获取视频的代码位置
             //获取所有本地视频的列表fragment
-            mCurrentFragment = VideoListFragment.newInstance(mVideoList);
+            mCurrentFragment = FolderListFragment.newInstance(mVideoList);
             fm.beginTransaction().add(R.id.fragmentContainer, mCurrentFragment).commit();
         }
 //        if (savedInstanceState != null) {
@@ -81,9 +81,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
 
     }
 
@@ -142,7 +139,7 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_offline_video) {
             //todo 应该将VideoFragment至于另一个activity中
-            mCurrentFragment = VideoListFragment.newInstance(mVideoList);
+//            mCurrentFragment = VideoListFragment.newInstance(mVideoList);
 
         } else if (id == R.id.nav_upload_video) {
             //// TODO: 16-3-7  此处仅作测试

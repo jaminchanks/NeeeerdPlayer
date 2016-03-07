@@ -2,9 +2,7 @@ package com.jamin.neeeerdplayer.ui.local;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ListFragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +15,7 @@ import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.ui.adapter.VideoAdapter;
 import com.jamin.neeeerdplayer.bean.FooVideo;
 import com.jamin.neeeerdplayer.ui.player.PlayerActivity;
+import com.jamin.neeeerdplayer.utils.FooUtils;
 
 import java.util.ArrayList;
 
@@ -43,6 +42,7 @@ public class VideoListFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -58,6 +58,9 @@ public class VideoListFragment extends ListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         getListView().setDivider(null);
+
+        String upperDirectorName = FooUtils.getSimperUpperDirectorName(mVideoList.get(0).getVideoPath());
+        getActivity().setTitle(upperDirectorName);
     }
 
 
@@ -90,6 +93,12 @@ public class VideoListFragment extends ListFragment {
         int id = item.getItemId();
 
         switch (id) {
+
+            case android.R.id.home:
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.no_effect, R.anim.out_fade_to_down);
+                return true;
+
             case R.id.action_refresh:
 
                 return true;

@@ -6,8 +6,8 @@ import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 
@@ -19,8 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 
@@ -39,7 +37,7 @@ public class FolderListFragment extends ListFragment {
     private static final String TAG = FolderListFragment.class.getSimpleName();
     private static final String FOLDER_LIST = "folder list";
     public static final String SELECTED_FOLDER = "selected folder";
-    private SwipeRefreshLayout swipeRefreshLayout;
+
     private ArrayList<FooFolder> mFolderList;
     private SearchView mSearchView;
     public static FolderListFragment newInstance(ArrayList<FooVideo> fooVideos) {
@@ -65,6 +63,7 @@ public class FolderListFragment extends ListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         ListView listView = getListView();
         listView.setDivider(null);
+        getActivity().setTitle(getActivity().getResources().getString(R.string.local_video));
     }
 
 
@@ -72,6 +71,19 @@ public class FolderListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        FooFolder folder = (FooFolder) getListAdapter().getItem(position);
+
+        Intent intent = new Intent();
+        intent.putExtra(SELECTED_FOLDER, folder);
+        intent.setClass(getActivity(), VideoListActivity.class);
+        startActivity(intent);
+        //界面切换动画
+        getActivity().overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
     }
 
 

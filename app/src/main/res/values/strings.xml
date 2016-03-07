@@ -26,4 +26,7 @@
 
     <!-- -->
     <string name="video_count">%1$s个视频</string>
+
+
+    <string name="local_video">本地视频</string>
 </resources>

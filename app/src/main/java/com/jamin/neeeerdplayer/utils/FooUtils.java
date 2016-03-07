@@ -50,6 +50,11 @@ public class FooUtils {
         return path.substring(0, path.lastIndexOf(File.separator) - 1);
     }
 
+    public static String getSimperUpperDirectorName(String path) {
+        String[] paths = path.split(File.separator);
+        return paths[paths.length - 2];
+    }
+
     /**
      *
      * @param time 单位为ms
