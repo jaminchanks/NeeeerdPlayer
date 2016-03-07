@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onNewIntent(Intent intent) {
-        Toast.makeText(this, "ok", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "ok!", Toast.LENGTH_LONG).show();
     }
 
 }
