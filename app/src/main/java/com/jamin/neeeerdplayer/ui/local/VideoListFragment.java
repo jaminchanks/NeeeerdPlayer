@@ -93,12 +93,6 @@ public class VideoListFragment extends ListFragment {
         int id = item.getItemId();
 
         switch (id) {
-
-            case android.R.id.home:
-                getActivity().finish();
-                getActivity().overridePendingTransition(R.anim.no_effect, R.anim.out_fade_to_down);
-                return true;
-
             case R.id.action_refresh:
 
                 return true;

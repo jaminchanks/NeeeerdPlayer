@@ -1,5 +1,6 @@
 package com.jamin.neeeerdplayer.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,14 +12,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
 import com.jamin.neeeerdplayer.bean.VideoLab;
+import com.jamin.neeeerdplayer.ui.local.FolderListActivity;
 import com.jamin.neeeerdplayer.ui.local.FolderListFragment;
 import com.jamin.neeeerdplayer.ui.local.VideoListFragment;
+import com.jamin.neeeerdplayer.ui.mainPage.HomePageFragment;
 
 import java.util.ArrayList;
 
@@ -28,20 +32,19 @@ public class MainActivity extends AppCompatActivity
 
     private Fragment mCurrentFragment;
     private ArrayList<FooVideo> mVideoList;
-
+    private NavigationView navigationView;
+    private DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        initData();
 
         FragmentManager fm = getSupportFragmentManager();
         mCurrentFragment = fm.findFragmentById(R.id.fragmentContainer);
         if (null == mCurrentFragment) {
             //// TODO: 16-3-6 改变获取视频的代码位置
             //获取所有本地视频的列表fragment
-            mCurrentFragment = FolderListFragment.newInstance(mVideoList);
+            mCurrentFragment = HomePageFragment.newInstance();
             fm.beginTransaction().add(R.id.fragmentContainer, mCurrentFragment).commit();
         }
 //        if (savedInstanceState != null) {
@@ -54,11 +57,6 @@ public class MainActivity extends AppCompatActivity
         initView();
 
     }
-
-    private void initData() {
-        mVideoList = VideoLab.getInstance(this).getAllVideos();
-    }
-
 
     private void initView() {
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -73,13 +71,13 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
     }
@@ -87,7 +85,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -134,31 +131,46 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent intent = new Intent();
+        Class<?> clazz = null;
+        switch (id) {
+            case R.id.nav_online_video:
+//                clazz = MainActivity.class;
+                break;
+            case R.id.nav_offline_video:
+                clazz = FolderListActivity.class;
+                break;
+            case R.id.nav_upload_video:
 
-        if (id == R.id.nav_online_video) {
-            // Handle the camera action
-        } else if (id == R.id.nav_offline_video) {
-            //todo 应该将VideoFragment至于另一个activity中
-//            mCurrentFragment = VideoListFragment.newInstance(mVideoList);
+                break;
+            case R.id.nav_message:
 
-        } else if (id == R.id.nav_upload_video) {
-            //// TODO: 16-3-7  此处仅作测试
-            mCurrentFragment = FolderListFragment.newInstance(mVideoList);
+                break;
+            case R.id.nav_setting:
 
-        } else if (id == R.id.nav_message) {
+                break;
 
-        } else if (id == R.id.nav_setting) {
+            case R.id.nav_about_us:
 
-        } else if (id == R.id.nav_about_us) {
+                break;
 
+            default:
+                break;
         }
 
+
+
+
+
         //// TODO: 16-3-7 当fragment中有线程未被销毁时，替换fragment会有bug
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mCurrentFragment).commit();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mCurrentFragment).commit();
 
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+            drawer.closeDrawer(GravityCompat.START);
+        if (clazz != null) {
+            intent.setClass(this, clazz);
+            startActivity(intent);
+            return true;
+        }
         return true;
     }
 
@@ -166,6 +178,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onNewIntent(Intent intent) {
         Toast.makeText(this, "ok!", Toast.LENGTH_LONG).show();
+        MenuItem menuItem= navigationView.getMenu().findItem(R.id.nav_online_video);
+        menuItem.setChecked(true);
     }
 
 }

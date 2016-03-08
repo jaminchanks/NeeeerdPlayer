@@ -30,7 +30,16 @@
             android:launchMode="singleTop" />
 
         <activity android:name=".ui.local.VideoListActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.local.FolderListActivity" />
+            </activity>
+
+        <activity android:name=".ui.local.FolderListActivity"
+            android:launchMode="singleTop" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+            </activity>
     </application>
 
 </manifest>

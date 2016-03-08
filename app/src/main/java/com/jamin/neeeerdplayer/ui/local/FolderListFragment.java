@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.app.NavUtils;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import android.support.v7.widget.SearchView;
@@ -136,6 +137,11 @@ public class FolderListFragment extends ListFragment {
         int id = item.getItemId();
 
         switch (id) {
+            case android.R.id.home:
+                if (NavUtils.getParentActivityName(getActivity()) != null) {
+                    NavUtils.navigateUpFromSameTask(getActivity());
+                }
+                return true;
             case R.id.action_refresh:
                 return true;
             case R.id.action_search:
