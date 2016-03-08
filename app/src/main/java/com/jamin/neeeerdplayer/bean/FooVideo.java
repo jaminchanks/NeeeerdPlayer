@@ -1,5 +1,9 @@
 package com.jamin.neeeerdplayer.bean;
 
+import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
+import android.provider.MediaStore;
+
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -33,6 +37,17 @@ public class FooVideo implements Serializable {
         setDuration(duration);
         setLatestPlayTime(latestPlayTime);
     }
+
+
+    /**
+     * 获取视频缩略图图片
+     * @return
+     */
+    public Bitmap getThumbnail() {
+        return ThumbnailUtils.createVideoThumbnail(getVideoPath(),
+                MediaStore.Images.Thumbnails.MINI_KIND);
+    }
+
 
     public int getId() {
         return id;

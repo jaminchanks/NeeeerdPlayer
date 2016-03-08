@@ -49,8 +49,7 @@ public class VideoAdapter extends ArrayAdapter<FooVideo>{
         String displayName = fooVideo.getDisplayName();
         // TODO: 16-3-5 这里暂不处理图像的大小
             String data = fooVideo.getVideoPath();
-            viewHolder.videoThumbnail.setImageBitmap(ThumbnailUtils.createVideoThumbnail(data,
-                    MediaStore.Images.Thumbnails.MINI_KIND));
+            viewHolder.videoThumbnail.setImageBitmap(fooVideo.getThumbnail());
 //            viewHolder.videoThumbnail.setImageBitmap(thumbnail);
 
         viewHolder.displayNameView.setText(displayName);

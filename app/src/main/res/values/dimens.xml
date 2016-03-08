@@ -25,4 +25,9 @@
     <dimen name="video_thumbnail_icon_width">96dp</dimen>
     <dimen name="video_duration_font_size">15sp</dimen>
     <dimen name="video_name_font_size">16sp</dimen>
+
+    <!-- 用户相关 -->
+    <!-- 用户 -->
+    <dimen name="user_avatar_width">64dp</dimen>
+    <dimen name="user_avatar_height">64dp</dimen>
 </resources>
