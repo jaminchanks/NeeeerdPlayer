@@ -47,7 +47,6 @@ public class VideoAdapter extends ArrayAdapter<FooVideo>{
         //从视频中提取相关显示信息
         Bitmap thumbnail = BitmapFactory.decodeFile(fooVideo.getThumbnailPath());
         String displayName = fooVideo.getDisplayName();
-        // TODO: 16-3-5 这里暂不处理图像的大小
             String data = fooVideo.getVideoPath();
             viewHolder.videoThumbnail.setImageBitmap(fooVideo.getThumbnail());
 //            viewHolder.videoThumbnail.setImageBitmap(thumbnail);

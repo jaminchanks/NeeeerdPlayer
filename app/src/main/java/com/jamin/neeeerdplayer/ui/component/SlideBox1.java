@@ -1,14 +1,10 @@
-package com.jamin.neeeerdplayer.ui.compent;
+package com.jamin.neeeerdplayer.ui.component;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.ImageView;
 
 import com.jamin.neeeerdplayer.bean.FooVideo;
@@ -18,12 +14,12 @@ import java.util.ArrayList;
 /**
  * Created by jamin on 16-3-8.
  */
-public class SlideBox extends ViewPager{
+public class SlideBox1 extends ViewPager{
     private Context mContext;
     private ArrayList<FooVideo> mVideos;
     private ArrayList<ImageView> mImageViews = new ArrayList<>();
     private static final int PAGER_COUNT = 4;
-    public SlideBox(Context context, ArrayList<FooVideo> fooVideos) {
+    public SlideBox1(Context context, ArrayList<FooVideo> fooVideos) {
         super(context);
         this.mContext = context;
         this.mVideos = fooVideos;

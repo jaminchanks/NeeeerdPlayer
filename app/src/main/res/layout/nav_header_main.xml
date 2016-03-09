@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <com.jamin.neeeerdplayer.ui.compent.RoundImageView
+    <com.jamin.neeeerdplayer.ui.component.RoundImageView
         android:id="@+id/imageView"
         android:layout_width="@dimen/user_avatar_width"
         android:layout_height="@dimen/user_avatar_height"

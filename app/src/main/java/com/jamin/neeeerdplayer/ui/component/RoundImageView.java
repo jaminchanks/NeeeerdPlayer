@@ -1,4 +1,4 @@
-package com.jamin.neeeerdplayer.ui.compent;
+package com.jamin.neeeerdplayer.ui.component;
 
 import android.content.Context;
 import android.content.res.TypedArray;
