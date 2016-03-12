@@ -18,7 +18,7 @@
     <string name="about_us">关于</string>
     <string name="communicate">Communicate</string>
 
-    <!-- 视频文件视图 -->
+    <!-- 本地视频文件视图 -->
     <string name="show_all_dirs">所有文件夹</string>
     <string name="sort_by_dir">文件夹</string>
     <string name="show_all_files">文件</string>
@@ -34,11 +34,21 @@
     <string name="comic">动漫</string>
     <string name="literature">文学</string>
     <string name="music">音乐</string>
-    <string name="life">生活</string>
+    <string name="emotion">情感</string>
+    <string name="dancing">舞蹈</string>
+    <string name="exercise">运动</string>
+    <string name="fashion">时尚</string>
+    <string name="funny">娱乐</string>
+
 
     <!-- 首页页面 -->
     <string name="commend">推荐</string>
     <string name="billboard">排行榜</string>
     <string name="category">分类</string>
     <string name="dynamic">动态</string>
+
+
+
+    <!-- 其他 -->
+    <string name="see_more">查看更多</string>
 </resources>

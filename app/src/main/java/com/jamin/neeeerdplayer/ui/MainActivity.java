@@ -7,6 +7,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
 import com.jamin.neeeerdplayer.ui.base.FooVariant;
+import com.jamin.neeeerdplayer.ui.base.HomePage;
 import com.jamin.neeeerdplayer.ui.local.FolderListActivity;
 
 import java.util.ArrayList;
@@ -37,8 +39,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         initView();
         initFragmentViewPager();
@@ -79,20 +79,23 @@ public class MainActivity extends AppCompatActivity
             @Override
             public Fragment getItem(int position) {
                 //根据视频分类名生成指定的在线视频fragment
-                return FooVariant.getFragmentByHomePosition(position);
+                return HomePage.getFragmentByHomePosition(position);
             }
 
             @Override
             public int getCount() {
-                return FooVariant.getHomePageCount();
+                return HomePage.getHomePageCount();
             }
 
             @Override
             public CharSequence getPageTitle(int position) {
-                FooVariant.HomePage  homePage = FooVariant.getHomePageByPosition(position);
-                return FooVariant.getHomePageTitle(MainActivity.this, homePage);
+                HomePage  homePage = HomePage.getHomePageByPosition(position);
+                return HomePage.getHomePageTitle(MainActivity.this, homePage);
             }
         });
+
+        //设置缓存页
+        viewPager.setOffscreenPageLimit(HomePage.getHomePageCount());
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -177,10 +180,6 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
 
-
-
-
-
         //// TODO: 16-3-7 当fragment中有线程未被销毁时，替换fragment可能会有bug
 //        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mCurrentFragment).commit();
 
@@ -197,6 +196,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onNewIntent(Intent intent) {
         Toast.makeText(this, "ok!", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         MenuItem menuItem= navigationView.getMenu().findItem(R.id.nav_online_video);
         menuItem.setChecked(true);
     }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="16dp"
+    android:clickable="true"
+    android:background="@drawable/selector_category_item"
+    >
+    <ImageView
+        android:id="@+id/iv_category_icon"
+        android:layout_width="@dimen/category_icon_width"
+        android:layout_height="@dimen/category_icon_height"
+        android:src="@mipmap/category_technology_52"
+        />
+    <TextView
+        android:id="@+id/tv_category_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/technology"
+        android:textSize="@dimen/category_text_size"
+        android:gravity="center"
+        />
+</LinearLayout>

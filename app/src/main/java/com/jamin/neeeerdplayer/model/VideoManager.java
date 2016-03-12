@@ -1,4 +1,4 @@
-package com.jamin.neeeerdplayer.resManager;
+package com.jamin.neeeerdplayer.model;
 
 import android.content.Context;
 import android.database.Cursor;

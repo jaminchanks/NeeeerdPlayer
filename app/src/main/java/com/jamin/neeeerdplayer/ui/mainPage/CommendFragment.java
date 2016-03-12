@@ -9,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.jamin.neeeerdplayer.R;
-import com.jamin.neeeerdplayer.ui.component.AutoCycleImagesView;
+import com.jamin.neeeerdplayer.bean.FooVideo;
+import com.jamin.neeeerdplayer.bean.VideoLab;
+import com.jamin.neeeerdplayer.ui.component.AutoSlideBoxView;
+import com.jamin.neeeerdplayer.ui.component.OnlineVideoGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,24 +38,24 @@ public class CommendFragment extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         initImageCycleView(view);
+        initOnlineVideos(view);
     }
 
 
 
     //// TODO: 16-3-8 暂做测试
     private void initImageCycleView(View view) {
-        AutoCycleImagesView autoCycleImagesView = (AutoCycleImagesView) view.findViewById(R.id.cycle_view_test);
+        AutoSlideBoxView autoSlideBoxView = (AutoSlideBoxView) view.findViewById(R.id.cycle_view_test);
 
-        List<AutoCycleImagesView.ImageInfo> list=new ArrayList<AutoCycleImagesView.ImageInfo>();
-        list.add(new AutoCycleImagesView.ImageInfo(R.mipmap.test_image1, "风景1", ""));
-        list.add(new AutoCycleImagesView.ImageInfo(R.mipmap.test_image2, "风景2", ""));
-        list.add(new AutoCycleImagesView.ImageInfo(R.mipmap.test_image3, "风景3", ""));
-        list.add(new AutoCycleImagesView.ImageInfo(R.mipmap.test_image4, "风景4", ""));
+        List<AutoSlideBoxView.ImageInfo> list=new ArrayList<AutoSlideBoxView.ImageInfo>();
+        list.add(new AutoSlideBoxView.ImageInfo(R.mipmap.test_image1, "风景1", ""));
+        list.add(new AutoSlideBoxView.ImageInfo(R.mipmap.test_image2, "风景2", ""));
+        list.add(new AutoSlideBoxView.ImageInfo(R.mipmap.test_image3, "风景3", ""));
+        list.add(new AutoSlideBoxView.ImageInfo(R.mipmap.test_image4, "风景4", ""));
 
-
-        autoCycleImagesView.loadData(list, new AutoCycleImagesView.LoadImageCallBack() {
+        autoSlideBoxView.loadData(list, new AutoSlideBoxView.LoadImageCallBack() {
             @Override
-            public ImageView loadAndDisplay(AutoCycleImagesView.ImageInfo imageInfo) {
+            public ImageView loadAndDisplay(AutoSlideBoxView.ImageInfo imageInfo) {
                 //本地图片
                 ImageView imageView=new ImageView(getActivity());
                 imageView.setImageResource(Integer.parseInt(imageInfo.image.toString()));
@@ -60,10 +63,23 @@ public class CommendFragment extends Fragment{
             }
         });
 
-        autoCycleImagesView.setCycleDelayed(5000);
+        autoSlideBoxView.setCycleDelayed(5000);
     }
 
-    
+    private void initOnlineVideos(View view) {
+        ArrayList<FooVideo> fooVideos = VideoLab.getInstance(getActivity()).getAllVideos();
+
+
+        OnlineVideoGroup videoGroup1 = (OnlineVideoGroup) view.findViewById(R.id.online_video_group1);
+        videoGroup1.loadData(fooVideos);
+
+        OnlineVideoGroup videoGroup2 = (OnlineVideoGroup) view.findViewById(R.id.online_video_group2);
+        videoGroup2.loadData(fooVideos);
+
+        OnlineVideoGroup videoGroup3 = (OnlineVideoGroup) view.findViewById(R.id.online_video_group3);
+        videoGroup3.loadData(fooVideos);
+
+    }
     
     
 }

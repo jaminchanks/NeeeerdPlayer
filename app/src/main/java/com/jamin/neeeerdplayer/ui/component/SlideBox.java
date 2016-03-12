@@ -13,6 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by jamin on 16-3-8.
  */
+@Deprecated
 public class SlideBox extends FrameLayout {
     private ArrayList<FooVideo> mVideos = null;
 

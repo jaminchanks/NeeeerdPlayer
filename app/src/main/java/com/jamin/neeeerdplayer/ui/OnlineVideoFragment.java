@@ -9,16 +9,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jamin.neeeerdplayer.R;
-import com.jamin.neeeerdplayer.ui.base.FooVariant;
+import com.jamin.neeeerdplayer.ui.base.Category;
 
 /**
  * Created by jamin on 16-3-9.
  */
-public class InlineVideoFragment extends Fragment {
+public class OnlineVideoFragment extends Fragment {
     private static final String VIDEO_CATEGORY = "video category";
 
-    public static InlineVideoFragment newInstance(FooVariant.Category category) {
-        InlineVideoFragment fragment = new InlineVideoFragment();
+    public static OnlineVideoFragment newInstance(Category category) {
+        OnlineVideoFragment fragment = new OnlineVideoFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(VIDEO_CATEGORY, category);
         fragment.setArguments(bundle);
@@ -35,14 +35,14 @@ public class InlineVideoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_inline_videos, container, false);
+        return inflater.inflate(R.layout.fragment_online_videos, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
-        TextView textView = (TextView) view.findViewById(R.id.inline_video_category);
-        FooVariant.Category category = (FooVariant.Category) getArguments().getSerializable(VIDEO_CATEGORY);
-        textView.setText(FooVariant.getCategoryName(getActivity(), category));
+        TextView textView = (TextView) view.findViewById(R.id.video_online_category);
+        Category category = (Category) getArguments().getSerializable(VIDEO_CATEGORY);
+        textView.setText(category.toString(getActivity()));
     }
 
 }

@@ -18,7 +18,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/inline_video_category"
+        android:id="@+id/video_online_category"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

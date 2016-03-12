@@ -94,7 +94,7 @@ return imageView;
  * @author 代凯男
  *
  */
-public class AutoCycleImagesView extends FrameLayout {
+public class AutoSlideBoxView extends FrameLayout {
 
     /**
      * 上下文
@@ -146,12 +146,12 @@ public class AutoCycleImagesView extends FrameLayout {
     private TextView mText;
 
 
-    public AutoCycleImagesView(Context context) {
+    public AutoSlideBoxView(Context context) {
         super(context);
         init(context);
     }
 
-    public AutoCycleImagesView(Context context, AttributeSet attrs) {
+    public AutoSlideBoxView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
@@ -172,7 +172,7 @@ public class AutoCycleImagesView extends FrameLayout {
      * @author 代凯男
      */
     private void initView() {
-        View.inflate(mContext, R.layout.view_image_cycle, this);
+        View.inflate(mContext, R.layout.component_auto_slide_box, this);
         FrameLayout fl_image_cycle = (FrameLayout) findViewById(R.id.fl_image_cycle);
         mViewPager=new ImageCycleViewPager(mContext);
         mViewPager.setLayoutParams(new  ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));

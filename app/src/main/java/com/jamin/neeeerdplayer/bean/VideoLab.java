@@ -2,7 +2,7 @@ package com.jamin.neeeerdplayer.bean;
 
 import android.content.Context;
 
-import com.jamin.neeeerdplayer.resManager.VideoManager;
+import com.jamin.neeeerdplayer.model.VideoManager;
 
 import java.util.ArrayList;
 

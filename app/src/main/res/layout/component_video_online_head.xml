@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/video_category_title_margin_top"
+    android:paddingBottom="@dimen/video_category_title_margin_bottom"
+    >
+
+    <TextView
+        android:id="@+id/tv_video_online_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="动漫"
+        android:textSize="@dimen/video_category_title_font"
+        android:textColor="@color/pure_black"
+        android:layout_alignParentTop="true"
+        android:background="@mipmap/bg_category_name"
+        />
+    <TextView
+        android:id="@+id/tv_see_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/see_more"
+        android:background="@color/item_pressed_bg"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
+
+
+

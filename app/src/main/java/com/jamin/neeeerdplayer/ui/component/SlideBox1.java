@@ -14,6 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by jamin on 16-3-8.
  */
+@Deprecated
 public class SlideBox1 extends ViewPager{
     private Context mContext;
     private ArrayList<FooVideo> mVideos;

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/video_category_title_margin_bottom"
+    >
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/selector_category_item"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.jamin.neeeerdplayer.ui.component.FooImageView
+                android:id="@+id/iv_video_online_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/video_thumbnail_online_height"
+                android:src="@mipmap/thumbnail_test1"
+                android:scaleType="centerCrop"
+                />
+            <TextView
+                android:id="@+id/tv_video_online_display_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="初音未来最新专辑..."
+                android:textColor="@color/pure_black"
+                android:textSize="@dimen/video_title_online_font"
+                android:layout_below="@id/iv_video_online_thumbnail"
+                android:paddingTop="@dimen/video_online_view_default_padding"
+                android:paddingLeft="@dimen/video_online_view_default_padding"
+                android:paddingRight="@dimen/video_online_view_default_padding"
+                />
+            <TextView
+                android:id="@+id/tv_video_online_display_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="播放：123"
+                android:textSize="@dimen/video_play_time_font"
+                android:layout_alignLeft="@id/iv_video_online_thumbnail"
+                android:layout_alignStart="@id/iv_video_online_thumbnail"
+                android:layout_below="@id/tv_video_online_display_name"
+                android:padding="@dimen/video_online_view_default_padding"
+                />
+            <TextView
+                android:id="@+id/tv_tv_video_online_comment_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="评论：123"
+                android:textSize="@dimen/video_play_time_font"
+                android:layout_alignEnd="@id/iv_video_online_thumbnail"
+                android:layout_alignRight="@id/iv_video_online_thumbnail"
+                android:layout_below="@id/tv_video_online_display_name"
+                android:padding="@dimen/video_online_view_default_padding"
+                />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

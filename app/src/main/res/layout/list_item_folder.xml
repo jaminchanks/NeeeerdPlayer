@@ -10,7 +10,7 @@
     >
 
     <ImageView
-        android:id="@+id/folder_icon"
+        android:id="@+id/iv_folder_icon"
         android:layout_width="@dimen/folder_icon_size"
         android:layout_height="@dimen/folder_icon_size"
         android:src="@mipmap/folders_blue_64"
