@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.jamin.neeeerdplayer.R;
-import com.jamin.neeeerdplayer.ui.adapter.VideoAdapter;
 import com.jamin.neeeerdplayer.bean.FooVideo;
 import com.jamin.neeeerdplayer.ui.player.PlayerActivity;
 import com.jamin.neeeerdplayer.utils.FooUtils;
@@ -25,7 +24,7 @@ import java.util.ArrayList;
 public class VideoListFragment extends ListFragment {
     private static final String TAG = VideoListFragment.class.getSimpleName();
 
-    public static final String VIDEO_LIST = "video list";
+    private static final String VIDEO_LIST = "video list";
     public static final String SELECTED_VIDEO = "selected Video";
 
 
@@ -85,27 +84,27 @@ public class VideoListFragment extends ListFragment {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.action_refresh:
-
-                return true;
-            case R.id.action_search:
-                return true;
-
-            case R.id.action_settings:
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        switch (id) {
+//            case R.id.action_refresh:
+//
+//                return true;
+//            case R.id.action_search:
+//                return true;
+//
+//            case R.id.action_settings:
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
 
 }

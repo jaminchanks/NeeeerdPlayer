@@ -24,7 +24,7 @@
                 android:scaleType="centerCrop"
                 />
             <TextView
-                android:id="@+id/tv_video_online_display_name"
+                android:id="@+id/tv_video_online_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="初音未来最新专辑..."
@@ -36,25 +36,25 @@
                 android:paddingRight="@dimen/video_online_view_default_padding"
                 />
             <TextView
-                android:id="@+id/tv_video_online_display_time"
+                android:id="@+id/tv_video_online_play_times"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="播放：123"
                 android:textSize="@dimen/video_play_time_font"
                 android:layout_alignLeft="@id/iv_video_online_thumbnail"
                 android:layout_alignStart="@id/iv_video_online_thumbnail"
-                android:layout_below="@id/tv_video_online_display_name"
+                android:layout_below="@id/tv_video_online_title"
                 android:padding="@dimen/video_online_view_default_padding"
                 />
             <TextView
-                android:id="@+id/tv_tv_video_online_comment_time"
+                android:id="@+id/tv_tv_video_online_comment_times"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="评论：123"
                 android:textSize="@dimen/video_play_time_font"
                 android:layout_alignEnd="@id/iv_video_online_thumbnail"
                 android:layout_alignRight="@id/iv_video_online_thumbnail"
-                android:layout_below="@id/tv_video_online_display_name"
+                android:layout_below="@id/tv_video_online_title"
                 android:padding="@dimen/video_online_view_default_padding"
                 />
         </RelativeLayout>

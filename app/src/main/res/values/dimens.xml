@@ -8,11 +8,14 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="activity_default_margin">16dp</dimen>
 
-
-    <!-- folder_listView子项目的layout参数 -->
+    <!-- 列表项默认间隔 -->
     <dimen name="list_item_padding_top">5dp</dimen>
     <dimen name="list_item_padding_bottom">5dp</dimen>
     <dimen name="list_item_margin_default">5dp</dimen>
+
+    <dimen name="list_item_use_info_default">10dp</dimen>
+
+    <!-- folder_listView子项目的layout参数 -->
     <dimen name="folder_icon_size">48dp</dimen>
     <dimen name="folder_name_font_size">25sp</dimen>
     <dimen name="folder_content_num_font_size">12sp</dimen>
@@ -52,4 +55,7 @@
     <!-- 用户 -->
     <dimen name="user_avatar_width">64dp</dimen>
     <dimen name="user_avatar_height">64dp</dimen>
+    <dimen name="font_user_info_tip">16sp</dimen>
+    <dimen name="font_user_info">16sp</dimen>
+
 </resources>

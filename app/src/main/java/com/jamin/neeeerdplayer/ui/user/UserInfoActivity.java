@@ -1,7 +1,10 @@
 package com.jamin.neeeerdplayer.ui.user;
 
+
+
 import android.support.v4.app.Fragment;
 
+import com.jamin.neeeerdplayer.bean.User;
 import com.jamin.neeeerdplayer.ui.base.SingleFragmentActivity;
 
 /**
@@ -10,7 +13,11 @@ import com.jamin.neeeerdplayer.ui.base.SingleFragmentActivity;
 public class UserInfoActivity extends SingleFragmentActivity{
     @Override
     protected Fragment onCreateFragment() {
-        return null;
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        User user = new User();
+        return UserInfoFragment.newInstance(user);
     }
 
 

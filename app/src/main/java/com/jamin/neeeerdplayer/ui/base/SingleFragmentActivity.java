@@ -3,11 +3,9 @@ package com.jamin.neeeerdplayer.ui.base;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.jamin.neeeerdplayer.R;
@@ -47,7 +45,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
 
     /**
-     * 设置层级导航可用
+     * 菜单栏选项事件
      * @param item
      * @return
      */
@@ -64,8 +62,18 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                     NavUtils.navigateUpFromSameTask(this);
                 }
                 return true;
+            case R.id.action_refresh:
+                return true;
+            case R.id.action_search:
+                onSearchRequested();
+                return true;
+
+            case R.id.action_settings:
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
+
         }
     }
 

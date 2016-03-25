@@ -1,7 +1,8 @@
 package com.jamin.neeeerdplayer.ui.base;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.content.Context;
+
 
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.ui.mainPage.BillboardFragment;

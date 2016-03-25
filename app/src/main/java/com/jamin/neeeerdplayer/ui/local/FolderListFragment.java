@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.NavUtils;
-import android.support.v4.widget.SwipeRefreshLayout;
 
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
@@ -26,7 +25,6 @@ import android.widget.ListView;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooFolder;
 import com.jamin.neeeerdplayer.bean.FooVideo;
-import com.jamin.neeeerdplayer.ui.adapter.FolderAdapter;
 import com.jamin.neeeerdplayer.utils.FooUtils;
 
 import java.util.ArrayList;
@@ -129,32 +127,32 @@ public class FolderListFragment extends ListFragment {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        switch (id) {
-            case android.R.id.home:
-                if (NavUtils.getParentActivityName(getActivity()) != null) {
-                    NavUtils.navigateUpFromSameTask(getActivity());
-                }
-                return true;
-            case R.id.action_refresh:
-                return true;
-            case R.id.action_search:
-                getActivity().onSearchRequested();
-                return true;
-
-            case R.id.action_settings:
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        switch (id) {
+//            case android.R.id.home:
+//                if (NavUtils.getParentActivityName(getActivity()) != null) {
+//                    NavUtils.navigateUpFromSameTask(getActivity());
+//                }
+//                return true;
+//            case R.id.action_refresh:
+//                return true;
+//            case R.id.action_search:
+//                getActivity().onSearchRequested();
+//                return true;
+//
+//            case R.id.action_settings:
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
 
 }

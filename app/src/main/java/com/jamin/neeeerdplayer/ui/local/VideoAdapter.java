@@ -1,4 +1,4 @@
-package com.jamin.neeeerdplayer.ui.adapter;
+package com.jamin.neeeerdplayer.ui.local;
 
 import android.app.Activity;
 import android.graphics.Bitmap;

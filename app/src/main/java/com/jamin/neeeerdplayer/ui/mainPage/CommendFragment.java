@@ -10,9 +10,9 @@ import android.widget.ImageView;
 
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
-import com.jamin.neeeerdplayer.bean.VideoLab;
+import com.jamin.neeeerdplayer.database.VideoLab;
 import com.jamin.neeeerdplayer.ui.component.AutoSlideBoxView;
-import com.jamin.neeeerdplayer.ui.component.OnlineVideoGroup;
+import com.jamin.neeeerdplayer.ui.component.OnlineVideoGridGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class CommendFragment extends Fragment{
 
 
 
-    //// TODO: 16-3-8 暂做测试
+    //// TODO: 16-3-8 暂做测试 轮播
     private void initImageCycleView(View view) {
         AutoSlideBoxView autoSlideBoxView = (AutoSlideBoxView) view.findViewById(R.id.cycle_view_test);
 
@@ -67,16 +67,22 @@ public class CommendFragment extends Fragment{
     }
 
     private void initOnlineVideos(View view) {
-        ArrayList<FooVideo> fooVideos = VideoLab.getInstance(getActivity()).getAllVideos();
+        ArrayList<FooVideo> fooVideos = new ArrayList<>();
+
+        ArrayList<FooVideo> videos = VideoLab.getInstance(getActivity()).getAllVideos();
+        //测试代码
+        for (int i = 0; i < (videos.size() > 4 ? 4 : videos.size()); i++) {
+            fooVideos.add(videos.get(i));
+        }
 
 
-        OnlineVideoGroup videoGroup1 = (OnlineVideoGroup) view.findViewById(R.id.online_video_group1);
+        OnlineVideoGridGroup videoGroup1 = (OnlineVideoGridGroup) view.findViewById(R.id.online_video_group1);
         videoGroup1.loadData(fooVideos);
 
-        OnlineVideoGroup videoGroup2 = (OnlineVideoGroup) view.findViewById(R.id.online_video_group2);
+        OnlineVideoGridGroup videoGroup2 = (OnlineVideoGridGroup) view.findViewById(R.id.online_video_group2);
         videoGroup2.loadData(fooVideos);
 
-        OnlineVideoGroup videoGroup3 = (OnlineVideoGroup) view.findViewById(R.id.online_video_group3);
+        OnlineVideoGridGroup videoGroup3 = (OnlineVideoGridGroup) view.findViewById(R.id.online_video_group3);
         videoGroup3.loadData(fooVideos);
 
     }

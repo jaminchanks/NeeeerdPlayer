@@ -1,15 +1,10 @@
 package com.jamin.neeeerdplayer.ui.component;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.jamin.neeeerdplayer.R;
@@ -56,6 +51,9 @@ public class OnlineVideoGroup extends FrameLayout{
 
 
         //两个videoView之间的间隔
+
+
+
         int videoViewSpacePx = DensityUtils.dip2px(mContext, VIDEO_VIEW_SPACE_DP);
 
         int screenWith = ScreenUtils.getScreenWidth(mContext);
@@ -68,29 +66,29 @@ public class OnlineVideoGroup extends FrameLayout{
         tv.setText(videos.get(0).getCategory().toString(mContext));
 
 
-        TableLayout tableLayout = (TableLayout) mVideoGroup.findViewById(R.id.table_video_online);
-
-        TableRow tableRow = null;
-        for (int i = 0; i < videos.size(); i++) {
-            //// TODO: 16-3-12 此处有待优化
-            SingleOnlineVideoView videoView = new SingleOnlineVideoView(mContext, videos.get(i));
-
-            if (i % 2 == 0) {
-                tableRow = new TableRow(mContext);
-                videoView.setPadding(0, 0, videoViewSpacePx / 2, 0);
-            } else {
-
-                videoView.setPadding(videoViewSpacePx / 2, 0, 0, 0);
-            }
-
-
-            assert tableRow != null;
-            tableRow.addView(videoView, videoViewWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-            if (i % 2 == 1 || i == videos.size()) {
-                tableLayout.addView(tableRow);
-            }
-        }
+//        TableLayout tableLayout = (TableLayout) mVideoGroup.findViewById(R.id.table_video_online);
+//
+//        TableRow tableRow = null;
+//        for (int i = 0; i < videos.size(); i++) {
+//            //// TODO: 16-3-12 此处有待优化
+//            OnlineVideoView videoView = new OnlineVideoView(mContext, videos.get(i));
+//
+//            if (i % 2 == 0) {
+//                tableRow = new TableRow(mContext);
+//                videoView.setPadding(0, 0, videoViewSpacePx / 2, 0);
+//            } else {
+//
+//                videoView.setPadding(videoViewSpacePx / 2, 0, 0, 0);
+//            }
+//
+//
+//            assert tableRow != null;
+//            tableRow.addView(videoView, videoViewWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
+//
+//            if (i % 2 == 1 || i == videos.size()) {
+//                tableLayout.addView(tableRow);
+//            }
+//        }
 
 
 

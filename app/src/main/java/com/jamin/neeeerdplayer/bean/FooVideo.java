@@ -6,9 +6,9 @@ import android.media.ThumbnailUtils;
 import android.provider.MediaStore;
 
 import com.jamin.neeeerdplayer.ui.base.Category;
+import com.jamin.neeeerdplayer.utils.BitmapUtils;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * Created by jamin on 16-3-5.
@@ -24,8 +24,8 @@ public class FooVideo implements Serializable {
     private long size;
     private long duration;
     private long latestPlayTime;    //最后的播放时间
-    private long playTime;
-    private long commentTime;
+    private long playTimes;
+    private long commentTimes;
     private Category category;
     private String title;   //这个是视频的标题
 
@@ -36,26 +36,27 @@ public class FooVideo implements Serializable {
      * @return
      */
     public Bitmap getThumbnail() {
-        return ThumbnailUtils.createVideoThumbnail(getVideoPath(),
+        Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(getVideoPath(),
                 MediaStore.Images.Thumbnails.MINI_KIND);
+        return bitmap;
     }
 
 
     //// TODO: 16-3-10 部分函数需要修改
-    public long getPlayTime() {
+    public long getPlayTimes() {
         return 123;
     }
 
-    public void setPlayTime(long playTime) {
-        this.playTime = playTime;
+    public void setPlayTimes(long playTimes) {
+        this.playTimes = playTimes;
     }
 
-    public long getCommentTime() {
+    public long getCommentTimes() {
         return 456;
     }
 
-    public void setCommentTime(long commentTime) {
-        this.commentTime = commentTime;
+    public void setCommentTimes(long commentTimes) {
+        this.commentTimes = commentTimes;
     }
 
     //// TODO: 16-3-11 此方法暂做测试
@@ -70,8 +71,9 @@ public class FooVideo implements Serializable {
         this.category = Category.parseCategory(context, category);
     }
 
+    //// TODO: 16-3-12 修改修改的函数
     public String getTitle() {
-        return title;
+        return getShortDisplayName();
     }
 
     public void setTitle(String title) {

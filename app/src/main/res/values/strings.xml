@@ -48,6 +48,25 @@
     <string name="dynamic">动态</string>
 
 
+    <!-- 视频排行 -->
+    <string name="billboard_no1">1.%1$s</string>
+    <string name="billboard_no2">2.%1$s</string>
+    <string name="billboard_no3">3.%1$s</string>
+    <string name="billboard_no4">4.%1$s</string>
+    <string name="billboard_no5">5.%1$s</string>
+    <string name="billboard_no6">6.%1$s</string>
+    <string name="billboard_no7">7.%1$s</string>
+    <string name="billboard_no8">8.%1$s</string>
+    <string name="billboard_no9">9.%1$s</string>
+    <string name="billboard_no10">10.%1$s</string>
+
+    <!-- 用户信息 -->
+    <string name="password">密码</string>
+    <string name="marks">简介</string>
+    <string name="userName">昵称</string>
+    <string name="sex">性别</string>
+    <string name="birthday">出生日期</string>
+    <string name="email">电子邮箱</string>
 
     <!-- 其他 -->
     <string name="see_more">查看更多</string>

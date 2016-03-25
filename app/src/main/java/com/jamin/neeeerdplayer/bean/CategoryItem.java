@@ -50,5 +50,6 @@ public class CategoryItem {
     private Bitmap icon;
     private String title;
     private Category category;
+    private int id;
 
 }

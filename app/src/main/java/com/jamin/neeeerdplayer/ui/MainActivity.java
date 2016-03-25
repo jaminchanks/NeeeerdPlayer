@@ -8,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -21,9 +20,9 @@ import android.widget.Toast;
 
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
-import com.jamin.neeeerdplayer.ui.base.FooVariant;
 import com.jamin.neeeerdplayer.ui.base.HomePage;
 import com.jamin.neeeerdplayer.ui.local.FolderListActivity;
+import com.jamin.neeeerdplayer.ui.user.UserInfoActivity;
 
 import java.util.ArrayList;
 
@@ -67,6 +66,17 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View headerView = navigationView.getHeaderView(0);
+        View avatarView = headerView.findViewById(R.id.user_avatar);
+        avatarView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, UserInfoActivity.class);
+                startActivity(intent);
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
     }
 
     //// TODO: 16-3-8 暂作测试 viewpager设置
@@ -75,7 +85,7 @@ public class MainActivity extends AppCompatActivity
      */
     private void initFragmentViewPager() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.main_viewpager);
-        viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
                 //根据视频分类名生成指定的在线视频fragment
@@ -94,7 +104,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        //设置缓存页
+        //设置缓存页数
         viewPager.setOffscreenPageLimit(HomePage.getHomePageCount());
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);

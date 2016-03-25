@@ -1,7 +1,8 @@
-package com.jamin.neeeerdplayer.bean;
+package com.jamin.neeeerdplayer.database;
 
 import android.content.Context;
 
+import com.jamin.neeeerdplayer.bean.FooVideo;
 import com.jamin.neeeerdplayer.model.VideoManager;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class VideoLab {
 
     public ArrayList<FooVideo> getAllVideos() {
         //todo 在这里从数据库中获取所有视频信息，确定可将所有视频类放在内存中？
-        return new  VideoManager(mAppContext).queryAllVideos();
+        return new VideoManager(mAppContext).queryAllVideos();
     }
 
 

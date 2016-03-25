@@ -4,12 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/component_video_online_head"/>
-    <TableLayout
-        android:id="@+id/table_video_online"
+    <!--<TableLayout-->
+    <!--android:id="@+id/table_video_online"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:stretchColumns="0,1"-->
+    <!--&gt;-->
+    <!--</TableLayout>-->
+
+    <com.jamin.neeeerdplayer.ui.component.NoScrollGridView
+        android:id="@+id/grid_video_online"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stretchColumns="0,1"
+        android:layout_height="match_parent"
+        android:numColumns="2"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
         >
-    </TableLayout>
+
+    </com.jamin.neeeerdplayer.ui.component.NoScrollGridView>
+
 
 </LinearLayout>

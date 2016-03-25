@@ -2,9 +2,8 @@ package com.jamin.neeeerdplayer.ui.local;
 
 import android.support.v4.app.Fragment;
 
-import com.jamin.neeeerdplayer.bean.FooFolder;
 import com.jamin.neeeerdplayer.bean.FooVideo;
-import com.jamin.neeeerdplayer.bean.VideoLab;
+import com.jamin.neeeerdplayer.database.VideoLab;
 import com.jamin.neeeerdplayer.ui.base.SingleFragmentActivity;
 
 import java.util.ArrayList;
