@@ -22,7 +22,8 @@
             >
 
 
-            <com.jamin.neeeerdplayer.ui.component.RoundImageView
+            <ImageView
+                android:id="@+id/iv_user_login_avatar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/me"
@@ -54,7 +55,7 @@
                             android:layout_height="32dp"
                             android:src="@mipmap/icon_user_48"
                             />
-                        <EditText
+                        <android.support.v7.widget.AppCompatEditText
                             android:id="@+id/et_user_login_account"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"
@@ -84,7 +85,7 @@
                             android:layout_height="32dp"
                             android:src="@mipmap/icon_key_48"
                             />
-                        <EditText
+                        <android.support.v7.widget.AppCompatEditText
                             android:id="@+id/et_user_login__password"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"

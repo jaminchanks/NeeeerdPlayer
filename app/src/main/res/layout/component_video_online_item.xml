@@ -16,7 +16,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <com.jamin.neeeerdplayer.ui.component.FooImageView
+            <com.jamin.neeeerdplayer.ui.widget.FooImageView
                 android:id="@+id/iv_video_online_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/video_thumbnail_online_height"

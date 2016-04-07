@@ -27,7 +27,7 @@
                 app:layout_collapseParallaxMultiplier="0.7"
                 android:gravity="center"
                 >
-                <com.jamin.neeeerdplayer.ui.component.RoundImageView
+                <ImageView
                     android:id="@+id/user_info_avatar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/user_avatar_height"

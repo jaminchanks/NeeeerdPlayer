@@ -12,4 +12,7 @@ public class UserLoginActivity extends SingleFragmentActivity {
     protected Fragment onCreateFragment() {
         return new UserLoginFragment();
     }
+
+
+
 }

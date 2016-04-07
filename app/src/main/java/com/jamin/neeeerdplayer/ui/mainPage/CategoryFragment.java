@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.CategoryItem;
 import com.jamin.neeeerdplayer.ui.base.Category;
-import com.jamin.neeeerdplayer.ui.component.CategoryGroup;
+import com.jamin.neeeerdplayer.ui.widget.CategoryGroup;
 
 import java.util.ArrayList;
 

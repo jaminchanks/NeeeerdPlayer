@@ -1,6 +1,7 @@
 package com.jamin.neeeerdplayer.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -14,15 +15,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
+import com.jamin.neeeerdplayer.bean.User;
+import com.jamin.neeeerdplayer.ui.base.BaseApplication;
 import com.jamin.neeeerdplayer.ui.base.HomePage;
 import com.jamin.neeeerdplayer.ui.local.FolderListActivity;
 import com.jamin.neeeerdplayer.ui.user.UserInfoActivity;
+import com.jamin.neeeerdplayer.ui.widget.RoundBitmapDisplayer;
+import com.jamin.neeeerdplayer.utils.ImageCacheHelper;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -34,6 +44,11 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<FooVideo> mVideoList;
     private NavigationView navigationView;
     private DrawerLayout drawer;
+
+    private ImageView mIvAvatar;
+    private TextView mTxUserName;
+    private TextView mTxUserMarks;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +82,19 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerView = navigationView.getHeaderView(0);
-        View avatarView = headerView.findViewById(R.id.user_avatar);
-        avatarView.setOnClickListener(new View.OnClickListener() {
+
+        mIvAvatar = (ImageView) headerView.findViewById(R.id.user_avatar_nav);
+        mTxUserName = (TextView) headerView.findViewById(R.id.user_name_nav);
+        mTxUserMarks = (TextView) headerView.findViewById(R.id.user_marks_nav);
+
+        User user = ((BaseApplication) getApplication()).getUser();
+        String avatarUri = user.getHead();
+        Log.i("user_head",avatarUri );
+
+        //// TODO: 16-4-7 仅是测试
+        ImageCacheHelper.getImageLoader().displayImage(avatarUri, mIvAvatar, ImageCacheHelper.getMyAcountAvatarOptions());
+
+        mIvAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -77,7 +103,13 @@ public class MainActivity extends AppCompatActivity
                 drawer.closeDrawer(GravityCompat.START);
             }
         });
+
+        mTxUserName.setText(user.getUserName());
+        mTxUserMarks.setText(user.getMarks());
+
     }
+
+
 
     //// TODO: 16-3-8 暂作测试 viewpager设置
     /**

@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
 import com.jamin.neeeerdplayer.database.VideoLab;
-import com.jamin.neeeerdplayer.ui.component.AutoSlideBoxView;
-import com.jamin.neeeerdplayer.ui.component.OnlineVideoGridGroup;
+import com.jamin.neeeerdplayer.ui.widget.AutoSlideBoxView;
+import com.jamin.neeeerdplayer.ui.widget.OnlineVideoGridGroup;
 
 import java.util.ArrayList;
 import java.util.List;

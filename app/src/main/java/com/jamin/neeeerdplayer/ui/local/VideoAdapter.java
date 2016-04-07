@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
-import com.jamin.neeeerdplayer.utils.FooUtils;
+import com.jamin.neeeerdplayer.utils.VideoUtils;
 
 import java.util.ArrayList;
 
@@ -49,7 +49,7 @@ public class VideoAdapter extends ArrayAdapter<FooVideo>{
 //            viewHolder.videoThumbnail.setImageBitmap(thumbnail);
 
         viewHolder.displayNameView.setText(displayName);
-        viewHolder.durationView.setText(FooUtils.timeFormat(fooVideo.getDuration()));
+        viewHolder.durationView.setText(VideoUtils.timeFormat(fooVideo.getDuration()));
         return convertView;
     }
 

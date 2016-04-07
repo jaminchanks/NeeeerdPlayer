@@ -1,4 +1,4 @@
-package com.jamin.neeeerdplayer.ui.component;
+package com.jamin.neeeerdplayer.ui.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

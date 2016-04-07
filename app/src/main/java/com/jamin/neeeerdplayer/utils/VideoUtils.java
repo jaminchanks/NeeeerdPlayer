@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * Created by jamin on 16-3-7.
  */
-public class FooUtils {
+public class VideoUtils {
     public static ArrayList<FooFolder> videoCategoryByFolder(ArrayList<FooVideo> videos) {
         ArrayList<FooFolder> fooFolderList = new ArrayList<>();
         for (int i = 0; i < videos.size(); i++) {

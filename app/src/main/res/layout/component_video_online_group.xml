@@ -12,7 +12,7 @@
     <!--&gt;-->
     <!--</TableLayout>-->
 
-    <com.jamin.neeeerdplayer.ui.component.NoScrollGridView
+    <com.jamin.neeeerdplayer.ui.widget.NoScrollGridView
         android:id="@+id/grid_video_online"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,7 +21,7 @@
         android:verticalSpacing="10dp"
         >
 
-    </com.jamin.neeeerdplayer.ui.component.NoScrollGridView>
+    </com.jamin.neeeerdplayer.ui.widget.NoScrollGridView>
 
 
 </LinearLayout>

@@ -10,12 +10,12 @@
         android:orientation="vertical"
         >
         <!-- 图片轮播 -->
-        <com.jamin.neeeerdplayer.ui.component.AutoSlideBoxView
+        <com.jamin.neeeerdplayer.ui.widget.AutoSlideBoxView
             android:id="@+id/cycle_view_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <com.jamin.neeeerdplayer.ui.component.OnlineVideoGridGroup
+        <com.jamin.neeeerdplayer.ui.widget.OnlineVideoGridGroup
             android:id="@+id/online_video_group1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:paddingRight="@dimen/activity_default_margin"
             />
 
-        <com.jamin.neeeerdplayer.ui.component.OnlineVideoGridGroup
+        <com.jamin.neeeerdplayer.ui.widget.OnlineVideoGridGroup
             android:id="@+id/online_video_group2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:paddingRight="@dimen/activity_default_margin"
             />
 
-        <com.jamin.neeeerdplayer.ui.component.OnlineVideoGridGroup
+        <com.jamin.neeeerdplayer.ui.widget.OnlineVideoGridGroup
             android:id="@+id/online_video_group3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

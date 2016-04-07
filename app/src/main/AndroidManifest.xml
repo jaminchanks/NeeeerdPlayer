@@ -3,6 +3,8 @@
     package="com.jamin.neeeerdplayer">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
         android:name=".ui.base.BaseApplication"
@@ -12,11 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".TestActivity">
+
+        </activity>
+
+
+
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
 
@@ -41,7 +48,9 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
-
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
 
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable" />

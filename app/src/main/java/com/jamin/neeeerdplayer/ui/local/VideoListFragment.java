@@ -6,7 +6,6 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -14,7 +13,7 @@ import android.widget.ListView;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
 import com.jamin.neeeerdplayer.ui.player.PlayerActivity;
-import com.jamin.neeeerdplayer.utils.FooUtils;
+import com.jamin.neeeerdplayer.utils.VideoUtils;
 
 import java.util.ArrayList;
 
@@ -58,7 +57,7 @@ public class VideoListFragment extends ListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         getListView().setDivider(null);
 
-        String upperDirectorName = FooUtils.getSimperUpperDirectorName(mVideoList.get(0).getVideoPath());
+        String upperDirectorName = VideoUtils.getSimperUpperDirectorName(mVideoList.get(0).getVideoPath());
         getActivity().setTitle(upperDirectorName);
     }
 

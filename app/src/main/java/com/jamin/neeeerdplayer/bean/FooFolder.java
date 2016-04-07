@@ -1,8 +1,7 @@
 package com.jamin.neeeerdplayer.bean;
 
-import com.jamin.neeeerdplayer.utils.FooUtils;
+import com.jamin.neeeerdplayer.utils.VideoUtils;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -22,12 +21,12 @@ public class FooFolder implements Serializable {
 
     //根据视频文件解析其所在文件夹路径
     public String getFolderSimpleName() {
-       return FooUtils.getSimperUpperDirectorName(videos.get(0).getVideoPath());
+       return VideoUtils.getSimperUpperDirectorName(videos.get(0).getVideoPath());
     }
 
     public String getFolderName() {
         String path = videos.get(0).getVideoPath();
-        return FooUtils.getUpperDirectorName(path);
+        return VideoUtils.getUpperDirectorName(path);
     }
 
     public void setFolderName(String folderName) {

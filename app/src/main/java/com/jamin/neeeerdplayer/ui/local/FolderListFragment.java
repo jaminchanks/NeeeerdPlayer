@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.support.v4.app.NavUtils;
 
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
@@ -25,7 +24,7 @@ import android.widget.ListView;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooFolder;
 import com.jamin.neeeerdplayer.bean.FooVideo;
-import com.jamin.neeeerdplayer.utils.FooUtils;
+import com.jamin.neeeerdplayer.utils.VideoUtils;
 
 import java.util.ArrayList;
 
@@ -41,7 +40,7 @@ public class FolderListFragment extends ListFragment {
     private SearchView mSearchView;
     public static FolderListFragment newInstance(ArrayList<FooVideo> fooVideos) {
         Bundle args = new Bundle();
-        ArrayList<FooFolder> fooFolders = FooUtils.videoCategoryByFolder(fooVideos);
+        ArrayList<FooFolder> fooFolders = VideoUtils.videoCategoryByFolder(fooVideos);
         args.putSerializable(FOLDER_LIST, fooFolders);
         FolderListFragment fragment = new FolderListFragment();
         fragment.setArguments(args);

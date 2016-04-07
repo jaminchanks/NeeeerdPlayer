@@ -1,60 +1,53 @@
 package com.jamin.neeeerdplayer.bean;
 
+import org.xutils.DbManager;
+import org.xutils.db.annotation.Column;
+import org.xutils.db.annotation.Table;
+import org.xutils.ex.DbException;
+
 import java.io.Serializable;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 /**
- * Created by jamin on 6/8/15.
+ * Created by jamin on 16-4-4.
  */
-public class User implements Serializable {
-    public static final String TABLE_NAME = "user";
-    public static final String COLUMNS[] = {
-            "id", "account", "password", "userName", "birthday",
-            "email", "marks", "identity", "head", "isBaned", "sex"
-    };
-
-    public static final String _ID = "id";
-    public static final String ACCOUNT = "account";
-    public static final String PASSWORD = "password";
-    public static final String USERNAME = "userName";
-    public static final String BIRTHDAY = "birthday";
-    public static final String EMAIL = "birthday";
-    public static final String MARKS = "marks";
-    public static final String IDENTITY = "identity";
-    public static final String HEAD = "head";
-    public static final String ISBANED = "isBaned";
-    public static final String SEX = "sex";
-
-
+@Table(name = "user")
+public class User implements Serializable{
+    @Column(name = "id", isId = true)
     private int id;
+
+    @Column(name = "account")
     private String account;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "userName")
     private String userName;
-    private Date birthday;
+
+    @Column(name = "birthday")
+    private String birthday;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "marks")
     private String marks;
-    private Integer identity = 0;
-    private String head = "head.jpg";
+
+    @Column(name = "identity")
+    private String identity;
+
+    @Column(name = "head")
+    private String head;
+
+    @Column(name = "isBaned")
     private boolean isBaned;
+
+    @Column(name = "sex")
     private String sex;
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-
-    public boolean getIsBaned() {
-        return isBaned;
-    }
-
-    public void setIsBaned(boolean isBanded) {
-        this.isBaned = isBanded;
-    }
 
     public int getId() {
         return id;
@@ -88,15 +81,44 @@ public class User implements Serializable {
         this.userName = userName;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.format(birthday);
+
+    /**
+     * 设置出生日期
+     * @param birthday
+     */
+    public void setBirthday(String birthday) {
+//        Calendar c = Calendar.getInstance();//获得一个日历的实例
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date date = null;
+//        try{
+//            date = sdf.parse(birthday);//初始日期
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//        c.setTime(date);//设置日历时间
+
         this.birthday = birthday;
     }
+
+    public void setBirthday(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        this.birthday = sdf.format(date);
+    }
+
+
+    /**
+     * 获取时间的字符串格式
+     * @return
+     */
+    public String getBirthdayStr() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(birthday);
+    }
+
 
     public String getEmail() {
         return email;
@@ -114,11 +136,11 @@ public class User implements Serializable {
         this.marks = marks;
     }
 
-    public Integer getIdentity() {
+    public String getIdentity() {
         return identity;
     }
 
-    public void setIdentity(Integer identity) {
+    public void setIdentity(String identity) {
         this.identity = identity;
     }
 
@@ -130,37 +152,38 @@ public class User implements Serializable {
         this.head = head;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        if (id != user.id) return false;
-        if (account != null ? !account.equals(user.account) : user.account != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
-        if (birthday != null ? !birthday.equals(user.birthday) : user.birthday != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (marks != null ? !marks.equals(user.marks) : user.marks != null) return false;
-        if (identity != null ? !identity.equals(user.identity) : user.identity != null) return false;
-        if (head != null ? !head.equals(user.head) : user.head != null) return false;
-
-        return true;
+    public boolean isBaned() {
+        return isBaned;
     }
 
+    public void setBaned(boolean baned) {
+        isBaned = baned;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+
+    public User getUserBean (DbManager db) throws DbException {
+        return db.findById(User.class, id);
+    }
+
+
     @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (account != null ? account.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (userName != null ? userName.hashCode() : 0);
-        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (marks != null ? marks.hashCode() : 0);
-        result = 31 * result + (identity != null ? identity.hashCode() : 0);
-        result = 31 * result + (head != null ? head.hashCode() : 0);
-        return result;
+    public String toString() {
+        return "user{ " +
+                "id=" + id + "," +
+                "account=\'" + account + "\'," +
+                "userName=\'" + userName + "\'," +
+                "birthday=\'" + birthday + "\'," +
+                "marks=\'" + marks + "\'," +
+                "email=\'" + email + "\'," +
+                "sex=\'" + sex + "\'" +
+                "}";
     }
 }
