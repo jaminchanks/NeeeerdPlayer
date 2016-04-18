@@ -1,7 +1,6 @@
 package com.jamin.neeeerdplayer.ui;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -22,17 +21,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
 import com.jamin.neeeerdplayer.bean.User;
+import com.jamin.neeeerdplayer.config.BaseNetConfig;
 import com.jamin.neeeerdplayer.ui.base.BaseApplication;
 import com.jamin.neeeerdplayer.ui.base.HomePage;
 import com.jamin.neeeerdplayer.ui.local.FolderListActivity;
 import com.jamin.neeeerdplayer.ui.user.UserInfoActivity;
-import com.jamin.neeeerdplayer.ui.widget.RoundBitmapDisplayer;
 import com.jamin.neeeerdplayer.utils.ImageCacheHelper;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -88,11 +86,11 @@ public class MainActivity extends AppCompatActivity
         mTxUserMarks = (TextView) headerView.findViewById(R.id.user_marks_nav);
 
         User user = ((BaseApplication) getApplication()).getUser();
-        String avatarUri = user.getHead();
+        String avatarUri = user.getAvatar();
         Log.i("user_head",avatarUri );
 
-        //// TODO: 16-4-7 仅是测试
-        ImageCacheHelper.getImageLoader().displayImage(avatarUri, mIvAvatar, ImageCacheHelper.getMyAcountAvatarOptions());
+        //// TODO: 16-4-7 仅是测试, 获取头像
+        Glide.with(this).load(avatarUri).placeholder(R.mipmap.default_image).into(mIvAvatar);
 
         mIvAvatar.setOnClickListener(new View.OnClickListener() {
             @Override

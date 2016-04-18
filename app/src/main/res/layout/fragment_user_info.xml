@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/item_pressed_bg"
     >
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -29,9 +30,9 @@
                 >
                 <ImageView
                     android:id="@+id/user_info_avatar"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/user_avatar_height"
-                    android:src="@mipmap/me"
+                    android:layout_width="@dimen/user_info_avatar_height"
+                    android:layout_height="@dimen/user_info_avatar_height"
+                    android:scaleType="fitXY"
                     />
             </LinearLayout>
             <android.support.v7.widget.Toolbar
@@ -47,7 +48,7 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
         <LinearLayout

@@ -55,6 +55,10 @@
     <!-- 用户 -->
     <dimen name="user_avatar_width">64dp</dimen>
     <dimen name="user_avatar_height">64dp</dimen>
+
+    <dimen name="user_info_avatar_width">72dp</dimen>
+    <dimen name="user_info_avatar_height">72dp</dimen>
+
     <dimen name="font_user_info_tip">16sp</dimen>
     <dimen name="font_user_info">16sp</dimen>
 

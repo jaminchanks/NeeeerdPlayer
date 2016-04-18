@@ -3,6 +3,7 @@ package com.jamin.neeeerdplayer.ui.user;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -10,15 +11,39 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.User;
+import com.jamin.neeeerdplayer.ui.base.BaseApplication;
+import com.jamin.neeeerdplayer.utils.ImageCacheHelper;
+
+import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 /**
  * Created by jamin on 16-3-23.
  */
 public class UserInfoFragment extends Fragment {
     public static final String USER_INFO = "userInfo";
+
+//    @ViewInject(R.id.user_info_avatar)
+    private ImageView mIvAvatar;
+
+    @ViewInject(R.id.user_info_marks)
+    private ImageView mTvMarks;
+
+    @ViewInject(R.id.tv_user_info_user_name)
+    private TextView mTvUserName;
+
+    @ViewInject(R.id.tv_user_info_email)
+    private TextView mTvEmail;
+
+    @ViewInject(R.id.tv_user_info_birthday)
+    private TextView mTvBirthday;
+
+
 
     public static UserInfoFragment newInstance(User user) {
         UserInfoFragment fragment = new UserInfoFragment();
@@ -37,13 +62,6 @@ public class UserInfoFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         initView(view);
-//
-//        ListView listview  = (ListView) view.findViewById(R.id.user_info_list_view);
-//        listview.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
-//                new String[]{
-//                        "1", "2","1", "2","1", "2","1", "2","1", "2","1", "2","1", "2",
-//                        "1", "2","1", "2","1", "2","1", "2","1", "2","1", "2","1", "2"
-//                }));
     }
 
 
@@ -71,6 +89,15 @@ public class UserInfoFragment extends Fragment {
         //通过CollapsingToolbarLayout修改字体颜色
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
+
+        //加载圆形头像
+        mIvAvatar = (ImageView) view.findViewById(R.id.user_info_avatar);
+        User user = ((BaseApplication)x.app()).getUser();
+        String avatarUri = user.getAvatar();
+        ImageCacheHelper.getImageLoader().displayImage(avatarUri, mIvAvatar, ImageCacheHelper.getMyAcountAvatarOptions());
+
+
+
 
     }
 

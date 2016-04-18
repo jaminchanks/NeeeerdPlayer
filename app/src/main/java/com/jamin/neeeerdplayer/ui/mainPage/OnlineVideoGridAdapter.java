@@ -8,19 +8,20 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jamin.neeeerdplayer.R;
-import com.jamin.neeeerdplayer.bean.FooVideo;
+import com.jamin.neeeerdplayer.bean.VideoWithUser;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jamin on 16-3-12.
  */
 public class OnlineVideoGridAdapter extends BaseAdapter {
-    private ArrayList<FooVideo> mVideos;
+    private List<VideoWithUser> mVideos;
     private Context mContext;
 //    private int mViewWidth;
-    public OnlineVideoGridAdapter(Context context, ArrayList<FooVideo> fooVideos) {
+    public OnlineVideoGridAdapter(Context context, List<VideoWithUser> fooVideos) {
         this.mVideos = fooVideos;
         this.mContext = context;
 
@@ -62,7 +63,7 @@ public class OnlineVideoGridAdapter extends BaseAdapter {
             convertView.setTag(viewHolder);
         }
 
-        FooVideo video = mVideos.get(position);
+        VideoWithUser video = mVideos.get(position);
         viewHolder = (MyViewHolder) convertView.getTag();
 
         //调整gridView组件之间的间距
@@ -72,10 +73,10 @@ public class OnlineVideoGridAdapter extends BaseAdapter {
 //                convertView.setPadding(mViewWidth / 2, 0, 0, 0);
 //            }
 
-        viewHolder.thumbnail.setImageBitmap(video.getThumbnail());
-        viewHolder.title.setText(video.getTitle());
-        viewHolder.playTimes.setText(String.valueOf(video.getPlayTimes()));
-        viewHolder.commentTimes.setText(String.valueOf(video.getCommentTimes()));
+        Glide.with(mContext).load(video.getVideo().getVideo_wrap()).into(viewHolder.thumbnail);
+        viewHolder.title.setText(video.getVideo().getVideo_name());
+        viewHolder.playTimes.setText(String.valueOf(video.getVideo().getWatch_numbers()));
+        viewHolder.commentTimes.setText(String.valueOf(video.getVideo().getLike_numbers()));
         return convertView;
     }
 

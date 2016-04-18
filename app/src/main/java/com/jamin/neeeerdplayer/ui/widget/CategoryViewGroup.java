@@ -21,16 +21,16 @@ import java.util.ArrayList;
 /**
  * Created by jamin on 16-3-10.
  */
-public class CategoryGroup extends FrameLayout {
+public class CategoryViewGroup extends FrameLayout {
     private Context mContext;
     private RecyclerView mRecyclerView;
-    public CategoryGroup(Context context) {
+    public CategoryViewGroup(Context context) {
         super(context);
         this.mContext = context;
         initView();
     }
 
-    public CategoryGroup(Context context, AttributeSet attrs) {
+    public CategoryViewGroup(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
         initView();

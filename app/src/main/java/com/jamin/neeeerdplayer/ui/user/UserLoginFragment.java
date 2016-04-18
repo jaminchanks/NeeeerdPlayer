@@ -17,11 +17,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.User;
+import com.jamin.neeeerdplayer.config.BaseNetConfig;
+import com.jamin.neeeerdplayer.database.UserDao;
 import com.jamin.neeeerdplayer.ui.MainActivity;
 import com.jamin.neeeerdplayer.ui.base.BaseApplication;
-import com.jamin.neeeerdplayer.ui.base.NetConfig;
+import com.jamin.neeeerdplayer.config.NetConfig;
 import com.jamin.neeeerdplayer.ui.base.XBaseFragment;
-import com.jamin.neeeerdplayer.utils.ImageCacheHelper;
 import com.jamin.neeeerdplayer.utils.StringUtils;
 
 import org.xutils.common.Callback;
@@ -118,8 +119,13 @@ public class UserLoginFragment extends XBaseFragment {
     }
 
 
+    /**
+     * 用户登陆
+     * @param account
+     * @param password
+     */
     private void askForLogin(String account, String password) {
-        RequestParams requestParams = new RequestParams(NetConfig.USER_LOGIN_URL);
+        RequestParams requestParams = new RequestParams(BaseNetConfig.WEB_URL + "/user/login");
         requestParams.addQueryStringParameter(ACCOUNT_PARAM, account);
         requestParams.addQueryStringParameter(PASSWORD_PARAM, password);
         requestParams.setConnectTimeout(5000);
@@ -132,27 +138,22 @@ public class UserLoginFragment extends XBaseFragment {
                 SharedPreferences.Editor editor = preferences.edit();
 
                 //把这两个重要信息放入本地中，表示用户已经登陆过了
-                editor.putString(NetConfig.ACCOUNT_NAME, user.getAccount());
-                //// TODO: 16-4-4  改变user_token的值
-                editor.putInt(NetConfig.USER_TOKEN, user.getId());
-                
+                editor.putInt(NetConfig.UID, user.getId());
+                editor.putString(NetConfig.USER_INFO, result);
+
+                //把用户的基本信息保存在本地
+                Log.i("user_saved_info", user.toString());
                 editor.apply();
-
-               //todo 把用户头像存在本地
-
-
-
+                //把用户信息保存到全局
+                ((BaseApplication)x.app()).setUser(user);
 
                 progressDialog.dismiss();
                 //跳转至主页面
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), MainActivity.class);
 
-                ((BaseApplication)x.app()).setUser(user);
-                Log.i("user_to_be_set", user.getHead());
-
                 startActivity(intent);
-                
+                getActivity().finish();
                 //// TODO: 16-4-7
                 Toast.makeText(getActivity(), ACCOUNT_PARAM + PASSWORD_PARAM, Toast.LENGTH_SHORT).show();
                 

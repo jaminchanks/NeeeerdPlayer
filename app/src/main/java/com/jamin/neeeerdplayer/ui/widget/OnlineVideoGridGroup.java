@@ -9,9 +9,12 @@ import android.widget.GridView;
 
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
+import com.jamin.neeeerdplayer.bean.OnlineVideo;
+import com.jamin.neeeerdplayer.bean.VideoWithUser;
 import com.jamin.neeeerdplayer.ui.mainPage.OnlineVideoGridAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jamin on 16-3-12.
@@ -38,7 +41,7 @@ public class OnlineVideoGridGroup extends FrameLayout{
          mVideoGroup = LayoutInflater.from(context).inflate(R.layout.component_video_online_group, this);
     }
 
-     public void loadData(ArrayList<FooVideo> videos) {
+     public void loadData(List<VideoWithUser> videos) {
          GridView gridView = (GridView) findViewById(R.id.grid_video_online);
          gridView.setAdapter(new OnlineVideoGridAdapter(mContext, videos));
      }

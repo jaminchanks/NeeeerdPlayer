@@ -17,6 +17,8 @@
     <!--通用item按下背景颜色-->
     <color name="item_pressed_bg">#d6d6d6d6</color>
 
+    <color name="card_view_bg">#fcfcfc</color>
+
     <!--整体线条颜色-->
     <color name="line_color">#d4d4d4</color>
 

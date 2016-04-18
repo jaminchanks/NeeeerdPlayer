@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.CategoryItem;
 import com.jamin.neeeerdplayer.ui.base.Category;
-import com.jamin.neeeerdplayer.ui.widget.CategoryGroup;
+import com.jamin.neeeerdplayer.ui.widget.CategoryViewGroup;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class CategoryFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
-        CategoryGroup categoryGroup = (CategoryGroup) view.findViewById(R.id.category_group);
+        CategoryViewGroup categoryGroup = (CategoryViewGroup) view.findViewById(R.id.category_group);
         categoryGroup.loadData(getCategoryData());
     }
 

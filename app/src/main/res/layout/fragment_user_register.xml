@@ -54,19 +54,19 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="32dp"
-                            android:text="登陆邮箱:"
+                            android:text="账       号:"
                             android:textSize="18sp"
                             android:textColor="@color/pure_black"
                             />
                         <EditText
-                            android:id="@+id/register_email"
+                            android:id="@+id/et_register_account"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"
                             android:background="@null"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:hint="请输入电子邮箱"
+                            android:hint="请输入账号名"
                             android:singleLine="true"
                             />
                     </LinearLayout>
@@ -92,7 +92,7 @@
                             android:gravity="center"
                             />
                         <EditText
-                            android:id="@+id/register_nickname"
+                            android:id="@+id/et_register_nickname"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"
                             android:background="@null"
@@ -125,7 +125,7 @@
                             android:gravity="center"
                             />
                         <EditText
-                            android:id="@+id/register_password"
+                            android:id="@+id/et_register_password"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"
                             android:password="true"
@@ -159,7 +159,7 @@
                             android:textSize="18sp"
                             />
                         <EditText
-                            android:id="@+id/register_confirm_password"
+                            android:id="@+id/et_register_confirm_password"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"
                             android:password="true"
@@ -177,7 +177,7 @@
 
 
             <Button
-                android:id="@+id/user_register_submit_btn"
+                android:id="@+id/btn_user_register_submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

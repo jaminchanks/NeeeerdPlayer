@@ -1,19 +1,30 @@
 package com.jamin.neeeerdplayer.ui.mainPage;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jamin.neeeerdplayer.R;
-import com.jamin.neeeerdplayer.bean.FooVideo;
-import com.jamin.neeeerdplayer.database.VideoLab;
+import com.jamin.neeeerdplayer.bean.VideoWithUser;
+import com.jamin.neeeerdplayer.config.BaseNetConfig;
 import com.jamin.neeeerdplayer.ui.widget.AutoSlideBoxView;
+import com.jamin.neeeerdplayer.ui.widget.NotScrollListView;
 import com.jamin.neeeerdplayer.ui.widget.OnlineVideoGridGroup;
 
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +32,9 @@ import java.util.List;
  * Created by jamin on 16-3-8.
  */
 public class CommendFragment extends Fragment{
-    private ImageView[] mImageViews;
-
+    List<List<VideoWithUser>> videoLists = new ArrayList<>();
+    NotScrollListView noScrollGridView;
+    CommendVideoAdapter commendVideoAdapter;
     @Override
     public void onCreate(Bundle onSavedInstanceState) {
         super.onCreate(onSavedInstanceState);
@@ -66,26 +78,101 @@ public class CommendFragment extends Fragment{
         autoSlideBoxView.setCycleDelayed(5000);
     }
 
-    private void initOnlineVideos(View view) {
-        ArrayList<FooVideo> fooVideos = new ArrayList<>();
 
-        ArrayList<FooVideo> videos = VideoLab.getInstance(getActivity()).getAllVideos();
-        //测试代码
-        for (int i = 0; i < (videos.size() > 4 ? 4 : videos.size()); i++) {
-            fooVideos.add(videos.get(i));
+    /**
+     * 获取网站推荐的视频信息内容
+     * @param view
+     */
+    private void initOnlineVideos(View view) {
+       //从网络上获取推荐视频内容
+        RequestParams params = new RequestParams(BaseNetConfig.WEB_URL + "/video/commend");
+        List< List<VideoWithUser>> videoWithUser;
+
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Type type = new TypeToken<List< List<VideoWithUser>>>(){}.getType();
+                List< List<VideoWithUser>> videos1 = new Gson().fromJson(result, type);
+                Log.i("commend_video", result);
+                videoLists.clear();
+                videoLists.addAll(videos1);
+                commendVideoAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.i("commend_video", "error");
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+                Log.i("commend_video", "cancel");
+            }
+
+            @Override
+            public void onFinished() {
+                Log.i("commend_video", "finish");
+            }
+        });
+
+
+        noScrollGridView = (NotScrollListView) view.findViewById(R.id.lv_commend_video);
+
+        commendVideoAdapter = new CommendVideoAdapter(getActivity(),  videoLists);
+        noScrollGridView.setAdapter(commendVideoAdapter);
+
+    }
+
+
+    private class CommendVideoAdapter extends BaseAdapter{
+        private Context context;
+        private List<List<VideoWithUser>> fooVideos;
+
+        private CommendVideoAdapter(Context context, List<List<VideoWithUser>> videos) {
+            this.context = context;
+            this.fooVideos = videos;
         }
 
 
-        OnlineVideoGridGroup videoGroup1 = (OnlineVideoGridGroup) view.findViewById(R.id.online_video_group1);
-        videoGroup1.loadData(fooVideos);
+        @Override
+        public int getCount() {
+            return fooVideos.size();
+        }
 
-        OnlineVideoGridGroup videoGroup2 = (OnlineVideoGridGroup) view.findViewById(R.id.online_video_group2);
-        videoGroup2.loadData(fooVideos);
+        @Override
+        public List<VideoWithUser> getItem(int position) {
+            return fooVideos.get(position);
+        }
 
-        OnlineVideoGridGroup videoGroup3 = (OnlineVideoGridGroup) view.findViewById(R.id.online_video_group3);
-        videoGroup3.loadData(fooVideos);
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
 
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            MyViewHolder myViewHolder;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(context).inflate(R.layout.list_item_online_video_grid_view, null);
+                myViewHolder = new MyViewHolder(convertView);
+                convertView.setTag(myViewHolder);
+            }
+
+            myViewHolder = (MyViewHolder) convertView.getTag();
+            myViewHolder.onlineVideoGridGroup.loadData(videoLists.get(position));
+
+            return convertView;
+        }
     }
-    
+
+    private class MyViewHolder {
+        private OnlineVideoGridGroup onlineVideoGridGroup;
+
+        public MyViewHolder(View view) {
+            onlineVideoGridGroup = (OnlineVideoGridGroup) view.findViewById(R.id.online_video_grid_group);
+        }
+    }
+
+
     
 }

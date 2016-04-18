@@ -6,11 +6,11 @@
 
     >
 
-    <com.jamin.neeeerdplayer.ui.widget.CategoryGroup
+    <com.jamin.neeeerdplayer.ui.widget.CategoryViewGroup
         android:id="@+id/category_group"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.jamin.neeeerdplayer.ui.widget.CategoryGroup>
+    </com.jamin.neeeerdplayer.ui.widget.CategoryViewGroup>
 
 </LinearLayout>
