@@ -60,10 +60,10 @@ public class CommendFragment extends Fragment{
         AutoSlideBoxView autoSlideBoxView = (AutoSlideBoxView) view.findViewById(R.id.cycle_view_test);
 
         List<AutoSlideBoxView.ImageInfo> list=new ArrayList<AutoSlideBoxView.ImageInfo>();
-        list.add(new AutoSlideBoxView.ImageInfo(R.mipmap.test_image1, "风景1", ""));
-        list.add(new AutoSlideBoxView.ImageInfo(R.mipmap.test_image2, "风景2", ""));
-        list.add(new AutoSlideBoxView.ImageInfo(R.mipmap.test_image3, "风景3", ""));
-        list.add(new AutoSlideBoxView.ImageInfo(R.mipmap.test_image4, "风景4", ""));
+        list.add(new AutoSlideBoxView.ImageInfo(R.mipmap.test_image1, "秋色", ""));
+        list.add(new AutoSlideBoxView.ImageInfo(R.mipmap.test_image2, "落叶", ""));
+        list.add(new AutoSlideBoxView.ImageInfo(R.mipmap.test_image3, "初音演唱会", ""));
+        list.add(new AutoSlideBoxView.ImageInfo(R.mipmap.test_image4, "黄昏", ""));
 
         autoSlideBoxView.loadData(list, new AutoSlideBoxView.LoadImageCallBack() {
             @Override
@@ -172,7 +172,5 @@ public class CommendFragment extends Fragment{
             onlineVideoGridGroup = (OnlineVideoGridGroup) view.findViewById(R.id.online_video_grid_group);
         }
     }
-
-
     
 }

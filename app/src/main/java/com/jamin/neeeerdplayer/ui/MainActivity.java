@@ -30,6 +30,7 @@ import com.jamin.neeeerdplayer.ui.base.BaseApplication;
 import com.jamin.neeeerdplayer.ui.base.HomePage;
 import com.jamin.neeeerdplayer.ui.local.FolderListActivity;
 import com.jamin.neeeerdplayer.ui.user.UserInfoActivity;
+import com.jamin.neeeerdplayer.ui.widget.GlideCircleTransform;
 import com.jamin.neeeerdplayer.utils.ImageCacheHelper;
 
 import java.util.ArrayList;
@@ -90,7 +91,8 @@ public class MainActivity extends AppCompatActivity
         Log.i("user_head",avatarUri );
 
         //// TODO: 16-4-7 仅是测试, 获取头像
-        Glide.with(this).load(avatarUri).placeholder(R.mipmap.default_image).into(mIvAvatar);
+        Glide.with(this).load(avatarUri).transform(new GlideCircleTransform(this))
+                .placeholder(R.mipmap.default_image).into(mIvAvatar);
 
         mIvAvatar.setOnClickListener(new View.OnClickListener() {
             @Override

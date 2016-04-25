@@ -1,13 +1,15 @@
 package com.jamin.neeeerdplayer.bean;
 
+import java.io.Serializable;
+
 /**
  * 简略的用户信息
  * @author jamin
  *
  */
-public class UserInfo {
+public class UserInfo implements Serializable{
     private int userId;
-    private String userAccount;
+    private String userName;
     private String userAvatar;
 
     public int getUserId() {
@@ -18,12 +20,12 @@ public class UserInfo {
         this.userId = userId;
     }
 
-    public String getUserAccount() {
-        return userAccount;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserAccount(String userAccount) {
-        this.userAccount = userAccount;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getUserAvatar() {
@@ -36,7 +38,7 @@ public class UserInfo {
 
     public UserInfo(User user) {
         setUserId(user.getId());
-        setUserAccount(user.getAccount());
+        setUserName(user.getUserName());
         setUserAvatar(user.getAvatar());
     }
 }

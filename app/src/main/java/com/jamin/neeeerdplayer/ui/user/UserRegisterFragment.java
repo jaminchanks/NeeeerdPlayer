@@ -1,33 +1,28 @@
 package com.jamin.neeeerdplayer.ui.user;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
+import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jamin.neeeerdplayer.R;
-import com.jamin.neeeerdplayer.bean.User;
 import com.jamin.neeeerdplayer.config.BaseNetConfig;
-import com.jamin.neeeerdplayer.config.NetConfig;
 import com.jamin.neeeerdplayer.ui.base.XBaseFragment;
 
+import org.w3c.dom.Text;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by jamin on 16-3-24.
@@ -35,8 +30,8 @@ import org.xutils.x;
 @ContentView(R.layout.fragment_user_register)
 public class UserRegisterFragment extends XBaseFragment implements View.OnClickListener{
 
-    @ViewInject(R.id.et_register_account)
-    EditText etRegisterAccount;
+    @ViewInject(R.id.et_register_email)
+    EditText etRegisterEmail;
     @ViewInject(R.id.et_register_password)
     EditText etRegisterPassword;
     @ViewInject(R.id.et_register_confirm_password)
@@ -64,7 +59,7 @@ public class UserRegisterFragment extends XBaseFragment implements View.OnClickL
             }
         });
 
-        getActivity().setTitle("Sign Up");
+        getActivity().setTitle("注册");
         btRegister.setOnClickListener(this);
     }
 
@@ -72,24 +67,35 @@ public class UserRegisterFragment extends XBaseFragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        String account = etRegisterAccount.getText().toString();
+        String email = etRegisterEmail.getText().toString();
         String userName = etRegisterUserName.getText().toString();
         String password = etRegisterPassword.getText().toString();
         String comfirmPassword = etRegisterComfirmPasseord.getText().toString();
 
-        if (account.equals("")) {
-            etRegisterAccount.setError("请输入账号");
+        if (TextUtils.isEmpty(email)) {
+            etRegisterEmail.setError("请输入邮箱地址");
             return;
         }
-        if(userName.equals("")) {
+
+        //邮箱格式验证
+        String regEx = "\\w+@\\w+\\.\\w+";
+        //正则表达式,检验邮箱
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(email);
+        if (!m.matches()) {
+            etRegisterEmail.setError("邮箱格式错误");
+            return;
+        }
+
+        if(TextUtils.isEmpty(userName)) {
             etRegisterUserName.setError("请输入昵称");
             return;
         }
-        if (password.equals("")) {
+        if (TextUtils.isEmpty(password)) {
             etRegisterPassword.setError("请输入密码");
             return;
         }
-        if (comfirmPassword.equals("")) {
+        if (TextUtils.isEmpty(comfirmPassword)) {
             etRegisterComfirmPasseord.setError("请重复输入密码");
             return;
         }else if (!comfirmPassword.equals(password)) {
@@ -98,7 +104,7 @@ public class UserRegisterFragment extends XBaseFragment implements View.OnClickL
         }
 
         RequestParams requestParams = new RequestParams(BaseNetConfig.WEB_URL + "/user/register");
-        requestParams.addQueryStringParameter("account", account);
+        requestParams.addQueryStringParameter("email", email);
         requestParams.addQueryStringParameter("password", password);
         requestParams.addQueryStringParameter("userName", userName);
         x.http().get(requestParams, new Callback.CommonCallback<String>() {

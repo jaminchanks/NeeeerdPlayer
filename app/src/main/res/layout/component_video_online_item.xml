@@ -35,22 +35,39 @@
                 android:paddingLeft="@dimen/video_online_view_default_padding"
                 android:paddingRight="@dimen/video_online_view_default_padding"
                 />
+
+            <TextView
+                android:id="@+id/tv_play_xx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/video_online_view_default_padding"
+                android:text="播放:"
+                android:layout_below="@id/tv_video_online_title"
+                />
             <TextView
                 android:id="@+id/tv_video_online_play_times"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="播放：123"
+                android:text="123"
                 android:textSize="@dimen/video_play_time_font"
-                android:layout_alignLeft="@id/iv_video_online_thumbnail"
-                android:layout_alignStart="@id/iv_video_online_thumbnail"
-                android:layout_below="@id/tv_video_online_title"
                 android:padding="@dimen/video_online_view_default_padding"
+                android:layout_alignBottom="@+id/tv_play_xx"
+                android:layout_toEndOf="@+id/tv_play_xx"
                 />
+
+            <TextView
+                android:id="@+id/tv_watch_xx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/video_online_view_default_padding"
+                android:text="点赞:"
+                android:layout_alignBottom="@+id/tv_video_online_play_times"
+                android:layout_toStartOf="@+id/tv_tv_video_online_comment_times" />
             <TextView
                 android:id="@+id/tv_tv_video_online_comment_times"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="评论：123"
+                android:text="123"
                 android:textSize="@dimen/video_play_time_font"
                 android:layout_alignEnd="@id/iv_video_online_thumbnail"
                 android:layout_alignRight="@id/iv_video_online_thumbnail"

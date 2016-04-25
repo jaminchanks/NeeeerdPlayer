@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".ui.base.BaseApplication"
@@ -14,8 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
-        <activity android:name=".ui.SplashActivity">
+        <activity android:name=".ui.SplashActivity"
+            android:theme="@style/NoTitleTheme"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,7 +29,7 @@
             >
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.user.UserRegisterActivity" />
-            </activity>
+        </activity>
 
         <activity android:name=".ui.user.UserLoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
@@ -36,7 +37,7 @@
             >
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.user.UserRegisterActivity" />
-            </activity>
+        </activity>
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
@@ -60,16 +61,30 @@
             android:launchMode="singleTop" >
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.local.FolderListActivity" />
-            </activity>
+        </activity>
 
         <activity android:name=".ui.local.FolderListActivity"
             android:launchMode="singleTop" >
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
-            </activity>
+        </activity>
         <activity android:name=".ui.user.UserInfoActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop" />
+
+
+        <activity android:name=".ui.video_comment.VideoWithCommentActivity"
+            android:launchMode="singleTop"
+            >
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
+
+        <activity android:name=".ui.user.LostPasswordActivity" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.user.UserLoginActivity" />
+        </activity>
+
     </application>
 
 </manifest>

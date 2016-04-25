@@ -13,6 +13,7 @@
     <color name="yellow">#ffff00</color>
     <color name="pure_white">#FFFFFF</color>
     <color name="pure_black">#000000</color>
+    <color name="light_black">#da1d1c1c</color>
 
     <!--通用item按下背景颜色-->
     <color name="item_pressed_bg">#d6d6d6d6</color>
@@ -23,8 +24,10 @@
     <color name="line_color">#d4d4d4</color>
 
     <!-- 半透明 -->
-    <color name="light_light_gray">#12000000</color>
+    <color name="light_light_gray1">#12000000</color>
+    <color name="light_light_gray2">#1d000000</color>
 
     <!-- 透明 -->
     <color name="transparent">#00ffffff</color>
+
 </resources>

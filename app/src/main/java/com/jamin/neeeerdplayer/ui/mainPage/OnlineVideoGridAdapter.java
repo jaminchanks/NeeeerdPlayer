@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.VideoWithUser;
+import com.jamin.neeeerdplayer.ui.base.Category;
 
 import java.util.List;
 
@@ -24,13 +25,6 @@ public class OnlineVideoGridAdapter extends BaseAdapter {
     public OnlineVideoGridAdapter(Context context, List<VideoWithUser> fooVideos) {
         this.mVideos = fooVideos;
         this.mContext = context;
-
-//        int videoViewSpacePx = DensityUtils.dip2px(mContext, 10);
-//
-//        int screenWith = ScreenUtils.getScreenWidth(mContext);
-//        mViewWidth = (screenWith -
-//                (mContext.getResources().getDimensionPixelSize(R.dimen.activity_default_margin)*2)
-//                - DensityUtils.dip2px(mContext, videoViewSpacePx))/2;
 
     }
 
@@ -65,13 +59,6 @@ public class OnlineVideoGridAdapter extends BaseAdapter {
 
         VideoWithUser video = mVideos.get(position);
         viewHolder = (MyViewHolder) convertView.getTag();
-
-        //调整gridView组件之间的间距
-//            if (position % 2 == 0) {
-//                convertView.setPadding(0, 0, mViewWidth / 2, 0);
-//            } else {
-//                convertView.setPadding(mViewWidth / 2, 0, 0, 0);
-//            }
 
         Glide.with(mContext).load(video.getVideo().getVideo_wrap()).into(viewHolder.thumbnail);
         viewHolder.title.setText(video.getVideo().getVideo_name());

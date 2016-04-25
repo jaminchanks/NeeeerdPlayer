@@ -200,11 +200,11 @@ public class User implements Serializable{
         this.userName = userName;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -252,7 +252,7 @@ public class User implements Serializable{
     private String account;
     private String password;
     private String userName;
-    private Date birthday;
+    private String birthday;
     private String email;
     private String marks;
     private int identity;

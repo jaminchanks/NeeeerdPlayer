@@ -42,6 +42,32 @@ public enum Category {
         return null;
     }
 
+    public static Category findCategoryByIndex(int id) {
+        switch (id) {
+            case 1:
+                return TECHNOLOGY;
+            case 2:
+                return COMIC;
+            case 3:
+                return LITERATURE;
+            case 4:
+                return MUSIC;
+            case 5:
+                return EMOTION;
+            case 6:
+                return DANCING;
+            case 7:
+                return EXERCISE;
+            case 8:
+                return FASHION;
+            case 9:
+                return FUNNY;
+            default:
+                return COMIC;
+        }
+    }
+
+
 
     public String toString(Context context) {
         int stringId;

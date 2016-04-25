@@ -18,7 +18,6 @@ import com.google.gson.Gson;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.User;
 import com.jamin.neeeerdplayer.config.BaseNetConfig;
-import com.jamin.neeeerdplayer.database.UserDao;
 import com.jamin.neeeerdplayer.ui.MainActivity;
 import com.jamin.neeeerdplayer.ui.base.BaseApplication;
 import com.jamin.neeeerdplayer.config.NetConfig;
@@ -44,12 +43,12 @@ public class UserLoginFragment extends XBaseFragment {
     private TextView mTvLostPass;
     @ViewInject(R.id.tv_user_login_register)
     private TextView mTvRegister;
-    @ViewInject(R.id.et_user_login_account)
-    private EditText mEtUserAccount;
+    @ViewInject(R.id.et_user_login_email)
+    private EditText mEtUserEmail;
     @ViewInject(R.id.et_user_login__password)
     private EditText mEtUserPassword;
 
-    private static final String ACCOUNT_PARAM = "account";
+    private static final String EMAIL_PARAM = "email";
     private static final String PASSWORD_PARAM = "password";
     private ProgressDialog progressDialog;
 
@@ -73,30 +72,33 @@ public class UserLoginFragment extends XBaseFragment {
             }
         });
 
-        getActivity().setTitle("Sign In");
+        getActivity().setTitle("登陆");
     }
 
 
     @Event(value = {R.id.bnt_user_login_submit, R.id.tv_user_lostPass, R.id.tv_user_login_register},
             type = View.OnClickListener.class)
     private void loginEvent(View view){
+
+        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.tv_user_lostPass:
+                intent.setClass(getActivity(), LostPasswordActivity.class);
+                startActivity(intent);
 
                 break;
             case R.id.tv_user_login_register:
-                Intent intent = new Intent();
                 intent.setClass(getActivity(), UserRegisterActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.bnt_user_login_submit:
-                String account = mEtUserAccount.getText().toString();
+                String email = mEtUserEmail.getText().toString();
                 String password = mEtUserPassword.getText().toString();
 
-                if (StringUtils.isEmpty(account)) {
-                    mEtUserAccount.setError("账号不能为空");
-                    mEtUserAccount.setFocusable(true);
+                if (StringUtils.isEmpty(email)) {
+                    mEtUserEmail.setError("账号不能为空");
+                    mEtUserEmail.setFocusable(true);
                     break;
                 }
 
@@ -109,7 +111,7 @@ public class UserLoginFragment extends XBaseFragment {
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 progressDialog.setMessage("正在登陆");
                 progressDialog.show();
-                askForLogin(account, password);
+                askForLogin(email, password);
 
                 break;
 
@@ -121,12 +123,12 @@ public class UserLoginFragment extends XBaseFragment {
 
     /**
      * 用户登陆
-     * @param account
+     * @param email
      * @param password
      */
-    private void askForLogin(String account, String password) {
+    private void askForLogin(String email, String password) {
         RequestParams requestParams = new RequestParams(BaseNetConfig.WEB_URL + "/user/login");
-        requestParams.addQueryStringParameter(ACCOUNT_PARAM, account);
+        requestParams.addQueryStringParameter(EMAIL_PARAM, email);
         requestParams.addQueryStringParameter(PASSWORD_PARAM, password);
         requestParams.setConnectTimeout(5000);
         x.http().post(requestParams, new Callback.CommonCallback<String>() {
@@ -155,7 +157,7 @@ public class UserLoginFragment extends XBaseFragment {
                 startActivity(intent);
                 getActivity().finish();
                 //// TODO: 16-4-7
-                Toast.makeText(getActivity(), ACCOUNT_PARAM + PASSWORD_PARAM, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), EMAIL_PARAM + PASSWORD_PARAM, Toast.LENGTH_SHORT).show();
                 
             }
 

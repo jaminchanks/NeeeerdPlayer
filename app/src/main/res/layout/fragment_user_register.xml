@@ -54,19 +54,19 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="32dp"
-                            android:text="账       号:"
+                            android:text="电子邮箱:"
                             android:textSize="18sp"
                             android:textColor="@color/pure_black"
                             />
                         <EditText
-                            android:id="@+id/et_register_account"
+                            android:id="@+id/et_register_email"
                             android:layout_width="match_parent"
                             android:layout_height="32dp"
                             android:background="@null"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:hint="请输入账号名"
+                            android:hint="请输入您的邮箱"
                             android:singleLine="true"
                             />
                     </LinearLayout>
@@ -86,7 +86,7 @@
                         <TextView
                             android:layout_width="80dp"
                             android:layout_height="32dp"
-                            android:text="用  户  名:"
+                            android:text="用户昵称:"
                             android:textSize="18sp"
                             android:textColor="@color/pure_black"
                             android:gravity="center"
@@ -196,14 +196,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
-        android:background="@color/light_light_gray"
+        android:background="@color/light_light_gray1"
         >
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/light_light_gray"
+            android:background="@color/light_light_gray1"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             android:fitsSystemWindows="true"
             />

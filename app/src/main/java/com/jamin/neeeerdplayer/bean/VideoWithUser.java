@@ -1,12 +1,14 @@
 package com.jamin.neeeerdplayer.bean;
 
 
+import java.io.Serializable;
+
 /**
  * 用于一对一查询
  * @author jamin
  *
  */
-public class VideoWithUser{
+public class VideoWithUser implements Serializable{
     public OnlineVideo getVideo() {
         return video;
     }
