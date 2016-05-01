@@ -1,4 +1,4 @@
-package com.jamin.neeeerdplayer.ui.user;
+package com.jamin.neeeerdplayer.ui.user.login;
 
 import android.support.v4.app.Fragment;
 
@@ -13,6 +13,10 @@ public class UserLoginActivity extends SingleFragmentActivity {
         return new UserLoginFragment();
     }
 
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //完全退出App
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
 }

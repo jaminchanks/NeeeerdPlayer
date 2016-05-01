@@ -37,6 +37,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
             mFragment = onCreateFragment();
             fragmentManager.beginTransaction().add(R.id.fragmentContainer, mFragment).commit();
         }
+
     }
 
     public Fragment getFragment() {

@@ -1,4 +1,4 @@
-package com.jamin.neeeerdplayer.ui.user;
+package com.jamin.neeeerdplayer.ui.user.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

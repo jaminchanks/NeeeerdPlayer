@@ -1,4 +1,4 @@
-package com.jamin.neeeerdplayer.ui.user;
+package com.jamin.neeeerdplayer.ui.user.info;
 
 
 

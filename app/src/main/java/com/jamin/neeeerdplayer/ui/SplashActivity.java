@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,18 +11,9 @@ import android.view.WindowManager;
 import com.google.gson.Gson;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.User;
-import com.jamin.neeeerdplayer.config.BaseNetConfig;
-import com.jamin.neeeerdplayer.database.UserDao;
 import com.jamin.neeeerdplayer.ui.base.BaseApplication;
 import com.jamin.neeeerdplayer.config.NetConfig;
-import com.jamin.neeeerdplayer.ui.user.UserLoginActivity;
-import com.jamin.neeeerdplayer.utils.StringUtils;
-
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
-
-import java.util.Objects;
+import com.jamin.neeeerdplayer.ui.user.login.UserLoginActivity;
 
 /**
  * Created by jamin on 16-3-24.
@@ -38,18 +28,25 @@ public class SplashActivity extends Activity{
         super.onCreate(onSavedInstanceState);
         setContentView(R.layout.activity_splash);
 
-//        getUserInfo();
+        getUserInfo();
 
-        toActivity(UserLoginActivity.class);
+//        toActivity(UserLoginActivity.class);
     }
 
+
+    public void initAppPath() {
+
+    }
+
+
+    /**
+     * 从本地获取用户已登陆信息
+     */
     private void getUserInfo() {
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         //从这个值来判断用户是否已经登陆过
-//        String account =  preferences.getString(NetConfig.ACCOUNT_NAME, "");
 
         int uid = preferences.getInt(NetConfig.UID, -1);
-//        uid = -1;
 
         //用户之前曾登陆过
         if (uid != -1) {

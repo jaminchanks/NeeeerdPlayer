@@ -1,6 +1,5 @@
 package com.jamin.neeeerdplayer.ui.widget;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
@@ -10,18 +9,13 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jamin.neeeerdplayer.R;
-import com.jamin.neeeerdplayer.bean.FooVideo;
-import com.jamin.neeeerdplayer.bean.OnlineVideo;
 import com.jamin.neeeerdplayer.bean.VideoWithUser;
 import com.jamin.neeeerdplayer.ui.base.Category;
 import com.jamin.neeeerdplayer.ui.mainPage.OnlineVideoGridAdapter;
-import com.jamin.neeeerdplayer.ui.user.UserLoginActivity;
 import com.jamin.neeeerdplayer.ui.video_comment.VideoWithCommentActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

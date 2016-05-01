@@ -1,11 +1,7 @@
-package com.jamin.neeeerdplayer.ui.user;
+package com.jamin.neeeerdplayer.ui.user.login;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.ui.base.SingleFragmentActivity;
 
 /**

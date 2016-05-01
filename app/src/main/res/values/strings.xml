@@ -8,6 +8,7 @@
     <string name="action_settings">设置</string>
     <string name="action_search">搜索</string>
     <string name="action_refresh">刷新</string>
+    <string name="action_confirm">确认</string>
 
     <!--侧边栏选项-->
     <string name="online_video">在线观看</string>

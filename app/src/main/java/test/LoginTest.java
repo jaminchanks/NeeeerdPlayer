@@ -4,7 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.EditText;
 
-import com.jamin.neeeerdplayer.ui.user.UserLoginActivity;
+import com.jamin.neeeerdplayer.ui.user.login.UserLoginActivity;
 import com.robotium.solo.Solo;
 
 import java.util.Objects;

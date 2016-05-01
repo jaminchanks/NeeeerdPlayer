@@ -25,13 +25,11 @@ import com.bumptech.glide.Glide;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
 import com.jamin.neeeerdplayer.bean.User;
-import com.jamin.neeeerdplayer.config.BaseNetConfig;
 import com.jamin.neeeerdplayer.ui.base.BaseApplication;
 import com.jamin.neeeerdplayer.ui.base.HomePage;
 import com.jamin.neeeerdplayer.ui.local.FolderListActivity;
-import com.jamin.neeeerdplayer.ui.user.UserInfoActivity;
+import com.jamin.neeeerdplayer.ui.user.info.UserInfoActivity;
 import com.jamin.neeeerdplayer.ui.widget.GlideCircleTransform;
-import com.jamin.neeeerdplayer.utils.ImageCacheHelper;
 
 import java.util.ArrayList;
 
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity
     private ImageView mIvAvatar;
     private TextView mTxUserName;
     private TextView mTxUserMarks;
-
+    private User mUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,14 +84,6 @@ public class MainActivity extends AppCompatActivity
         mTxUserName = (TextView) headerView.findViewById(R.id.user_name_nav);
         mTxUserMarks = (TextView) headerView.findViewById(R.id.user_marks_nav);
 
-        User user = ((BaseApplication) getApplication()).getUser();
-        String avatarUri = user.getAvatar();
-        Log.i("user_head",avatarUri );
-
-        //// TODO: 16-4-7 仅是测试, 获取头像
-        Glide.with(this).load(avatarUri).transform(new GlideCircleTransform(this))
-                .placeholder(R.mipmap.default_image).into(mIvAvatar);
-
         mIvAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,10 +94,23 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        mTxUserName.setText(user.getUserName());
-        mTxUserMarks.setText(user.getMarks());
+        showUserInfo();
 
     }
+
+
+    private void showUserInfo() {
+        mUser = ((BaseApplication) getApplication()).getUser();
+        String avatarUri = mUser.getAvatar();
+        Log.i("user_head",avatarUri );
+
+        //// TODO: 16-4-7 仅是测试, 获取头像
+        Glide.with(this).load(avatarUri).transform(new GlideCircleTransform(this))
+                .placeholder(R.mipmap.default_image).into(mIvAvatar);
+        mTxUserName.setText(mUser.getUserName());
+        mTxUserMarks.setText(mUser.getMarks());
+    }
+
 
 
 
@@ -157,38 +160,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    /**
-     * 菜单栏的设置全部交给子fragment去处理
-     */
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-////        menu.findItem(R.id.action_refresh).setVisible(false);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        switch (id) {
-////            case R.id.action_refresh:
-////
-////                return true;
-//            case R.id.action_search:
-//                return true;
-//
-//            case R.id.action_settings:
-//                return true;
-//
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -245,6 +216,8 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
         MenuItem menuItem= navigationView.getMenu().findItem(R.id.nav_online_video);
         menuItem.setChecked(true);
+        mUser = ((BaseApplication)getApplication()).getUser();
+        showUserInfo();
     }
 
 }

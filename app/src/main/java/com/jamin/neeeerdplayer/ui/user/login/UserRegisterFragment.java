@@ -1,4 +1,4 @@
-package com.jamin.neeeerdplayer.ui.user;
+package com.jamin.neeeerdplayer.ui.user.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,6 @@ import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.config.BaseNetConfig;
 import com.jamin.neeeerdplayer.ui.base.XBaseFragment;
 
-import org.w3c.dom.Text;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;

@@ -12,21 +12,21 @@ import java.util.ArrayList;
 /**
  * Created by jamin on 16-3-9.
  */
-public class AppPathConfig {
+public class BasePathConfig {
 
-    private static final String TAG = AppPathConfig.class.getSimpleName();
+    private static final String TAG = BasePathConfig.class.getSimpleName();
 
     private static String APP_DIR;  //完整路径名
     private static String APP_FOLDER = File.separator + "NeeerdPlayer" + File.separator; //路径名
     private static String CACHE_DIR;
 
 
-    private static AppPathConfig sInstance;
+    private static BasePathConfig sInstance;
 
-    public static AppPathConfig getInstance() {
+    public static BasePathConfig getInstance() {
         synchronized (TAG) {
             if (sInstance == null) {
-                sInstance = new AppPathConfig();
+                sInstance = new BasePathConfig();
             }
             if (TextUtils.isEmpty(APP_DIR)) {
                 boolean sdCardExist = Environment.getExternalStorageState().equals(

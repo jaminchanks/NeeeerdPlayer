@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.jamin.neeeerdplayer.R;
-import com.jamin.neeeerdplayer.ui.base.AppPathConfig;
+import com.jamin.neeeerdplayer.ui.base.BasePathConfig;
 import com.jamin.neeeerdplayer.ui.base.BaseApplication;
 import com.jamin.neeeerdplayer.ui.widget.RoundBitmapDisplayer;
 import com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiskCache;
@@ -61,8 +61,8 @@ public class ImageCacheHelper {
 
 
     public static void initImageLoader(Context context) {
-        File cacheDir = new File(AppPathConfig.getInstance().getImageDiskCacheDir());
-        File reserveCacheDir = new File(AppPathConfig.getInstance().getImageReserveDiskCacheDir());
+        File cacheDir = new File(BasePathConfig.getInstance().getImageDiskCacheDir());
+        File reserveCacheDir = new File(BasePathConfig.getInstance().getImageReserveDiskCacheDir());
         sDiskCache = new LimitedAgeDiskCache(cacheDir, reserveCacheDir, sMd5FileNameGenerator, AGE_DISK_CACHE);
         ImageLoaderConfiguration.Builder builder = new ImageLoaderConfiguration.Builder(context);
         builder.threadPriority(Thread.NORM_PRIORITY);

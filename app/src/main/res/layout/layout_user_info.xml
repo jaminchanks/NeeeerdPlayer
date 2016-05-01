@@ -26,12 +26,40 @@
                 android:textColor="@color/pure_black"
                 android:padding="@dimen/activity_default_margin"
                 />
-            <ImageView
-                android:layout_width="wrap_content"
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line_color"/>
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/list_item_use_info_default"
+            >
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/edit_gray_48"
+                android:layout_weight="1"
+                android:text="@string/email"
+                android:textSize="@dimen/font_user_info_tip"
+                android:textColor="@color/pure_black"
+                />
+            <TextView
+                android:id="@+id/tv_user_info_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="helloworld@xx.com"
+                android:textSize="@dimen/font_user_info_tip"
                 />
         </LinearLayout>
+
 
         <View
             android:layout_width="match_parent"
@@ -61,36 +89,11 @@
                 android:text="韩战"
                 android:textSize="@dimen/font_user_info_tip"
                 />
-        </LinearLayout>
-
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/line_color"/>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/list_item_use_info_default"
-            >
-            <TextView
-                android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/iv_modify_user_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/email"
-                android:textSize="@dimen/font_user_info_tip"
-                android:textColor="@color/pure_black"
-                />
-            <TextView
-                android:id="@+id/tv_user_info_email"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="helloworld@xx.com"
-                android:textSize="@dimen/font_user_info_tip"
+                android:src="@mipmap/right_52"
                 />
         </LinearLayout>
 
@@ -100,6 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/line_color"/>
+
 
         <LinearLayout
             android:orientation="horizontal"
@@ -123,9 +127,13 @@
                 android:text="1993-12-12"
                 android:textSize="@dimen/font_user_info_tip"
                 />
+            <ImageView
+                android:id="@+id/iv_modify_birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/right_52"
+                />
         </LinearLayout>
-
-
 
 
         <View
@@ -155,6 +163,12 @@
                 android:layout_weight="2"
                 android:text="******"
                 android:textSize="@dimen/font_user_info_tip"
+                />
+            <ImageView
+                android:id="@+id/iv_modify_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/right_52"
                 />
         </LinearLayout>
 
