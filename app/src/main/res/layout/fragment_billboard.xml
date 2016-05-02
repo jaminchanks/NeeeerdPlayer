@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <TextView
         android:layout_width="match_parent"
@@ -10,12 +11,20 @@
         android:text="本周排行榜"
         android:textColor="@color/pure_black"
         android:textSize="@dimen/video_category_title_font"
+        android:paddingLeft="@dimen/activity_default_margin"
         />
-        <ListView
-            android:id="@+id/list_view_billboard"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-        </ListView>
+    <ListView
+        android:id="@+id/list_view_billboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdge="none"
+        android:divider="@null"
+        android:scrollbars="none"
+        android:cacheColorHint="@android:color/transparent"
+        android:overScrollMode="never"
+        >
+
+    </ListView>
 
 </LinearLayout>

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.VideoWithUser;
-import com.jamin.neeeerdplayer.ui.base.Category;
 
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class OnlineVideoGridAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         MyViewHolder viewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.component_video_online_item, null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.list_item_video_online, null);
             viewHolder = new MyViewHolder();
             viewHolder.thumbnail = (ImageView) convertView.findViewById(R.id.iv_video_online_thumbnail);
             viewHolder.title = (TextView) convertView.findViewById(R.id.tv_video_online_title);

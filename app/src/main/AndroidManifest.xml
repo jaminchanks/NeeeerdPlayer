@@ -88,6 +88,20 @@
                 android:value=".ui.user.info.UserInfoActivity" />
         </activity>
 
+        <activity android:name=".ui.uploaded.UploadedActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
+
+        <activity android:name=".ui.user.friends.FriendListActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.user.info.UserInfoActivity" />
+        </activity>
+
+        <activity android:name=".ui.user.friends.FriendInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+        </activity>
 
     </application>
 

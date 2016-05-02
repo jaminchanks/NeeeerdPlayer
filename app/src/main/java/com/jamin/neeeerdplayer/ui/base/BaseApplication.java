@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.jamin.neeeerdplayer.bean.User;
+import com.jamin.neeeerdplayer.bean.UserRelationship;
 import com.jamin.neeeerdplayer.utils.ImageCacheHelper;
 
 import org.xutils.x;
@@ -13,6 +14,7 @@ import org.xutils.x;
  */
 public class BaseApplication extends Application{
     private User user;
+    private UserRelationship userRelationship;
 
     public static Context baseContext;
 
@@ -32,5 +34,17 @@ public class BaseApplication extends Application{
     public void setUser(User user) {
         this.user = user;
     }
+
+
+    public UserRelationship getUserRelationship() {
+        return userRelationship;
+    }
+
+    public void setUserRelationship(UserRelationship userRelationship) {
+        this.userRelationship = userRelationship;
+    }
+
+
+
 
 }

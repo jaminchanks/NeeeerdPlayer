@@ -28,6 +28,7 @@ import com.jamin.neeeerdplayer.bean.User;
 import com.jamin.neeeerdplayer.ui.base.BaseApplication;
 import com.jamin.neeeerdplayer.ui.base.HomePage;
 import com.jamin.neeeerdplayer.ui.local.FolderListActivity;
+import com.jamin.neeeerdplayer.ui.uploaded.UploadedActivity;
 import com.jamin.neeeerdplayer.ui.user.info.UserInfoActivity;
 import com.jamin.neeeerdplayer.ui.widget.GlideCircleTransform;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<FooVideo> mVideoList;
     private NavigationView navigationView;
     private DrawerLayout drawer;
+    private ViewPager viewPager;
 
     private ImageView mIvAvatar;
     private TextView mTxUserName;
@@ -119,7 +121,8 @@ public class MainActivity extends AppCompatActivity
      * viewpager的设置为 "首页推荐" + 其他视频分类fragment
      */
     private void initFragmentViewPager() {
-        ViewPager viewPager = (ViewPager) findViewById(R.id.main_viewpager);
+
+        viewPager = (ViewPager) findViewById(R.id.main_viewpager);
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -176,7 +179,7 @@ public class MainActivity extends AppCompatActivity
                 clazz = FolderListActivity.class;
                 break;
             case R.id.nav_upload_video:
-
+                clazz = UploadedActivity.class;
                 break;
             case R.id.nav_message:
 
@@ -208,12 +211,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onNewIntent(Intent intent) {
-        Toast.makeText(this, "ok!", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "ok!", Toast.LENGTH_LONG).show();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        viewPager.setCurrentItem(0);
         MenuItem menuItem= navigationView.getMenu().findItem(R.id.nav_online_video);
         menuItem.setChecked(true);
         mUser = ((BaseApplication)getApplication()).getUser();

@@ -142,6 +142,7 @@
             android:background="@color/line_color"/>
 
         <LinearLayout
+            android:id="@+id/ly_user_password"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

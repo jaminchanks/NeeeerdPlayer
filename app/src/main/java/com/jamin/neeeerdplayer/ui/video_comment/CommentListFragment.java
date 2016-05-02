@@ -1,18 +1,28 @@
 package com.jamin.neeeerdplayer.ui.video_comment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.os.Handler;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.CommentWithUser;
-import com.jamin.neeeerdplayer.bean.VideoWithUser;
 import com.jamin.neeeerdplayer.config.BaseNetConfig;
+import com.jamin.neeeerdplayer.ui.base.XBaseFragment;
+import com.jamin.neeeerdplayer.utils.DensityUtils;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -25,15 +35,19 @@ import java.util.List;
 /**
  * Created by jamin on 16-4-19.
  */
-public class CommentListFragment extends ListFragment {
+public class CommentListFragment extends XBaseFragment{
     private static final String TAG = CommentListFragment.class.getSimpleName();
+    public static final String REFRESH_COMMENT_DATA = "refresh comments";
+
 
     private static final String ONLINE_VIDEO_ID = "online video id";
 
-    private CommentAdapter mCommentAdapter;
+    private ListView mListView;
+    private SwipeRefreshLayout refreshLayout;
+    public CommentAdapter mCommentAdapter;
     private List<CommentWithUser> comments = new ArrayList<>();
     private int mVideoId;
-
+    private RefreshBroadCast broadCast;
 
     public static CommentListFragment newInstance(int videoId) {
         Bundle args = new Bundle();
@@ -46,8 +60,13 @@ public class CommentListFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_comment_list, null);
+        mListView = (ListView) view.findViewById(R.id.lv_comments);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.layout_refresh);
+        setRefreshLayoutSetting();
+
+        return view;
     }
 
 
@@ -55,14 +74,23 @@ public class CommentListFragment extends ListFragment {
     public void onCreate(Bundle onSavedInstanceState) {
         super.onCreate(onSavedInstanceState);
         setHasOptionsMenu(true);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(REFRESH_COMMENT_DATA);
+        broadCast = new RefreshBroadCast();
+        getActivity().registerReceiver(broadCast, intentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(broadCast);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        getListView().setDivider(null);
-
+        mListView.setDivider(null);
         mCommentAdapter = new CommentAdapter(getActivity(), comments);
-        setListAdapter(mCommentAdapter);
+        mListView.setAdapter(mCommentAdapter);
         requestForComment();
     }
 
@@ -71,6 +99,8 @@ public class CommentListFragment extends ListFragment {
      */
     private void requestForComment() {
         mVideoId = getArguments().getInt(ONLINE_VIDEO_ID);
+
+        refreshLayout.setRefreshing(true);
 
         RequestParams requestParams = new RequestParams(BaseNetConfig.WEB_URL + "/comment/video_id");
         requestParams.addQueryStringParameter("id", String.valueOf(mVideoId));
@@ -83,6 +113,7 @@ public class CommentListFragment extends ListFragment {
                 comments.addAll(commentWithUsers1);
                 mCommentAdapter.notifyDataSetChanged();
                 Log.i("获取评论", "成功" + mVideoId);
+                refreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -102,5 +133,34 @@ public class CommentListFragment extends ListFragment {
         });
     }
 
+
+    /**
+     * 下拉刷新设置
+     * */
+    private void setRefreshLayoutSetting() {
+        //设置刷新时动画的颜色，可以设置4个
+        refreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.setRefreshing(true);
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        requestForComment();
+                        if (refreshLayout.isRefreshing())
+                            refreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
+    }
+
+    public class RefreshBroadCast extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            requestForComment();
+        }
+    }
 
 }

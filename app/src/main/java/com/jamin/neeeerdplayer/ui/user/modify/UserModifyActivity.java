@@ -13,6 +13,7 @@ public class UserModifyActivity extends SingleFragmentActivity {
     public static final int MODIFY_USER_NAME = 0;
     public static final int MODIFY_BIRTHDAY = 1;
     public static final int MODIFY_PASSWORD = 2;
+    public static final int MODIFY_MARKS = 3;
 
     @Override
     protected Fragment onCreateFragment() {
@@ -36,6 +37,12 @@ public class UserModifyActivity extends SingleFragmentActivity {
             setTitle("修改密码");
             return new UserModifyPassFragment();
         }
+
+        if (modifyCode == MODIFY_MARKS) {
+            setTitle("修改简介");
+            return new UserModifyMarksFragment();
+        }
+
 
         return null;
     }

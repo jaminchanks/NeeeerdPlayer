@@ -10,6 +10,11 @@
         android:layout_height="match_parent"
 
         >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
         <TextView
             android:id="@+id/user_info_marks"
             android:layout_width="wrap_content"
@@ -17,7 +22,17 @@
             android:text="Do or Not to do, is a 问题!"
             android:textSize="@dimen/font_user_info"
             android:padding="10dp"
+            android:layout_weight="1"
             />
+            <ImageView
+                android:id="@+id/iv_modify_marks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/right_52"
+                android:padding="10dp"
+                />
+
+        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
@@ -30,6 +45,7 @@
             android:padding="5dp"
             >
             <LinearLayout
+                android:id="@+id/ly_user_follow"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -44,9 +60,10 @@
                     android:textColor="@color/pure_black"
                     />
                 <TextView
+                    android:id="@+id/tv_user_follow_num"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="123"
+                    android:text="0"
                     />
             </LinearLayout>
 
@@ -56,6 +73,7 @@
                 android:background="@color/line_color" />
 
             <LinearLayout
+                android:id="@+id/ly_user_be_followed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -70,9 +88,10 @@
                     android:textColor="@color/pure_black"
                     />
                 <TextView
+                    android:id="@+id/tv_user_be_followed_num"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="123"
+                    android:text="0"
                     />
             </LinearLayout>
         </LinearLayout>

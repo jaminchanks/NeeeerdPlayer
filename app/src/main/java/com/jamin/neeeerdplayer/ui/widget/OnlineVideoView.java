@@ -39,7 +39,7 @@ public class OnlineVideoView extends FrameLayout {
     }
 
     private View initView() {
-        return View.inflate(mContext, R.layout.component_video_online_item, this);
+        return View.inflate(mContext, R.layout.list_item_video_online, this);
     }
 
 }

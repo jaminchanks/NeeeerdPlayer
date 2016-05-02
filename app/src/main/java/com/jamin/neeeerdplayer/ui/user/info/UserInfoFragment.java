@@ -32,10 +32,12 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.User;
+import com.jamin.neeeerdplayer.bean.UserRelationship;
 import com.jamin.neeeerdplayer.config.BaseNetConfig;
 import com.jamin.neeeerdplayer.config.NetConfig;
 import com.jamin.neeeerdplayer.ui.base.BaseApplication;
 import com.jamin.neeeerdplayer.ui.base.BasePathConfig;
+import com.jamin.neeeerdplayer.ui.user.friends.FriendListActivity;
 import com.jamin.neeeerdplayer.ui.user.login.UserLoginActivity;
 import com.jamin.neeeerdplayer.ui.user.modify.UserModifyActivity;
 import com.jamin.neeeerdplayer.ui.widget.GlideCircleTransform;
@@ -69,6 +71,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener{
     private TextView mTvEmail;
     private TextView mTvBirthday;
     private LinearLayout getHeadLayout;
+    private CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     private Button mBtnLogOut;
     private Uri imageUri;
@@ -78,12 +81,20 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener{
     private ImageView mModifyUserName;
     private ImageView mModifyBirthday;
     private ImageView mModifyPassword;
+    private TextView mTvModifyMarks;
+    private ImageView mIvModifyMarks;
 
     //头像选项
     private TextView mTvChoosePhoto;
     private TextView mTvTakePhoto;
     private TextView mTvCancel;
 
+    //好友关系
+    private LinearLayout mFollowLayout;
+    private LinearLayout mBeFollowLayout;
+    private TextView mFollowedNum;
+    private TextView mBeFollowedNum;
+    private boolean isSecondTimeResume = false;
 
     public static UserInfoFragment newInstance(User user) {
         UserInfoFragment fragment = new UserInfoFragment();
@@ -99,6 +110,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener{
         setHasOptionsMenu(true);
         mGetActivity = getActivity();
         mUser = ((BaseApplication)mGetActivity.getApplication()).getUser();
+        requestUserRelationship();
     }
 
     @Override
@@ -126,6 +138,14 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener{
         mModifyUserName = (ImageView) view.findViewById(R.id.iv_modify_user_name);
         mModifyBirthday = (ImageView) view.findViewById(R.id.iv_modify_birthday);
         mModifyPassword = (ImageView) view.findViewById(R.id.iv_modify_password);
+        mTvModifyMarks = (TextView) view.findViewById(R.id.user_info_marks);
+        mIvModifyMarks = (ImageView) view.findViewById(R.id.iv_modify_marks);
+
+        mFollowedNum = (TextView) view.findViewById(R.id.tv_user_follow_num);
+        mBeFollowedNum = (TextView) view.findViewById(R.id.tv_user_be_followed_num);
+
+        mFollowLayout = (LinearLayout) view.findViewById(R.id.ly_user_follow);
+        mBeFollowLayout = (LinearLayout) view.findViewById(R.id.ly_user_be_followed);
 
         //隐藏布局, 头像的选项
         getHeadLayout = (LinearLayout) view.findViewById(R.id.get_head_layout);
@@ -149,7 +169,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener{
             }
         });
         //使用CollapsingToolbarLayout必须把title设置到CollapsingToolbarLayout上，设置到Toolbar上则不会显示
-        CollapsingToolbarLayout mCollapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar_layout);
+        mCollapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar_layout);
 
         //通过CollapsingToolbarLayout修改字体颜色
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
@@ -181,6 +201,12 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener{
         mModifyUserName.setOnClickListener(this);
         mModifyBirthday.setOnClickListener(this);
         mModifyPassword.setOnClickListener(this);
+        mIvModifyMarks.setOnClickListener(this);
+
+        mFollowedNum.setOnClickListener(this);
+        mBeFollowedNum.setOnClickListener(this);
+        mFollowLayout.setOnClickListener(this);
+        mBeFollowLayout.setOnClickListener(this);
     }
 
 
@@ -260,6 +286,18 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener{
                 toUserModifyActivity(UserModifyActivity.MODIFY_PASSWORD);
                 break;
 
+            case R.id.iv_modify_marks:
+                toUserModifyActivity(UserModifyActivity.MODIFY_MARKS);
+                break;
+
+            case R.id.ly_user_follow:
+            case R.id.tv_user_follow_num:
+                toFriendListActivity(FriendListActivity.FOLLOW_TYPE);
+                break;
+            case R.id.ly_user_be_followed:
+            case R.id.tv_user_be_followed_num:
+                toFriendListActivity(FriendListActivity.BE_FOLLOWED_TYPE);
+                break;
             default:
                 getHeadLayout.setVisibility(View.GONE);
                 break;
@@ -387,6 +425,11 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener{
                 ((BaseApplication)mGetActivity.getApplication()).setUser(mUser);
 
                 Glide.with(mGetActivity).load(mUser.getAvatar()).transform(new GlideCircleTransform(getActivity())).into(mIvAvatar);
+                mTvMarks.setText(mUser.getMarks());
+                mTvUserName.setText(mUser.getUserName());
+                mTvBirthday.setText(mUser.getBirthday());
+                mCollapsingToolbarLayout.setTitle(null == mUser.getUserName() ? "" : mUser.getUserName());
+
                 Log.i(TAG, "刷新成功");
             }
 
@@ -401,9 +444,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener{
             }
 
             @Override
-            public void onFinished() {
-
-            }
+            public void onFinished() {  }
         });
     }
 
@@ -416,12 +457,64 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener{
         editor.apply();
     }
 
-    public void toUserModifyActivity(int modifyCode) {
+    private void toUserModifyActivity(int modifyCode) {
         Intent intent = new Intent();
         intent.setClass(mGetActivity, UserModifyActivity.class);
         intent.putExtra(UserModifyActivity.MODIFY_TYPE,modifyCode);
         startActivity(intent);
     }
 
+    private void toFriendListActivity(int relationshipType) {
+        Intent intent = new Intent();
+        intent.setClass(mGetActivity, FriendListActivity.class);
+        intent.putExtra(FriendListActivity.RELATIONSHIP_TYPE, relationshipType);
+        startActivity(intent);
+    }
 
+
+    private void requestUserRelationship () {
+        RequestParams params = new RequestParams(BaseNetConfig.WEB_URL + "/relationship/user");
+        params.addParameter("userId", mUser.getId());
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                UserRelationship relationship = new Gson().fromJson(result, UserRelationship.class);
+                mFollowedNum.setText(relationship.getFollowUsers().size() + "");
+                mBeFollowedNum.setText(relationship.getBeFollowedUsers().size() + "");
+
+                //保存好友列表
+                ((BaseApplication) x.app()).setUserRelationship(relationship);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) { }
+
+            @Override
+            public void onCancelled(CancelledException cex) { }
+
+            @Override
+            public void onFinished() {  }
+        });
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshUser();
+        saveUserInfoToLocal();
+        refreshFollowNum();
+    }
+
+    private void refreshFollowNum() {
+        if (!isSecondTimeResume) {
+            isSecondTimeResume = true;
+            return;
+        }
+
+        UserRelationship relationship = ((BaseApplication) x.app()).getUserRelationship();
+        mFollowedNum.setText(relationship.getFollowUsers().size() + "");
+        mBeFollowedNum.setText(relationship.getBeFollowedUsers().size() + "");
+    }
 }

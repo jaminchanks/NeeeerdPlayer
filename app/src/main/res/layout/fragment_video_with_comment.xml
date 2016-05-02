@@ -1,30 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <VideoView
-        android:id="@+id/vv_online_video_to_show"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/cl_online_video_to_show"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:background="@android:color/black" >
+            <VideoView
+                android:id="@+id/vv_online_video_to_show"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                />
+        </FrameLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tl_comment_video"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@color/pure_white"
+            />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_comment_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_add_comment"
         android:layout_width="match_parent"
-        android:layout_height="210dp"
-        android:layout_gravity="center"
-        />
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tl_comment_video"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:background="@color/pure_white"
-        />
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_comment_video"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-
-
-    <!--<ListView-->
-        <!--android:id="@+id/lv_video_comment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-    <!--</ListView>-->
-
-</LinearLayout>
+        android:layout_gravity="center|bottom"
+        android:orientation="horizontal"
+        android:background="@color/pure_white"
+        android:visibility="gone"
+        >
+        <EditText
+            android:id="@+id/et_add_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="添加评论"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/bt_send_comment"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@android:drawable/ic_menu_send"
+            />
+    </LinearLayout>
+</FrameLayout>

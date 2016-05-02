@@ -20,7 +20,7 @@
                 android:id="@+id/iv_video_online_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/video_thumbnail_online_height"
-                android:src="@mipmap/thumbnail_test1"
+                android:src="@mipmap/refresh_64"
                 android:scaleType="centerCrop"
                 />
             <TextView

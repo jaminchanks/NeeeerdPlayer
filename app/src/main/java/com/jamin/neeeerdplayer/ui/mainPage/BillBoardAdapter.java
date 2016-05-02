@@ -1,8 +1,6 @@
 package com.jamin.neeeerdplayer.ui.mainPage;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,32 +8,33 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jamin.neeeerdplayer.R;
-import com.jamin.neeeerdplayer.bean.BillboardItem;
-import com.jamin.neeeerdplayer.ui.base.Category;
+import com.jamin.neeeerdplayer.bean.VideoWithUser;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jamin on 16-3-21.
  */
 public class BillBoardAdapter extends BaseAdapter {
-    ArrayList<BillboardItem> mBillboardList;
-    Context mContext;
+    private List<VideoWithUser> mVideos;
+    private Context mContext;
 
-    public BillBoardAdapter(Context context, ArrayList<BillboardItem> list) {
-        mContext = context;
-        mBillboardList = list;
+    public BillBoardAdapter(Context context, List<VideoWithUser> videos) {
+        this.mContext = context;
+        this.mVideos = videos;
     }
+
 
     @Override
     public int getCount() {
-        return mBillboardList.size();
+        return mVideos.size();
     }
 
     @Override
-    public BillboardItem getItem(int position) {
-        return mBillboardList.get(position);
+    public VideoWithUser getItem(int position) {
+        return mVideos.get(position);
     }
 
     @Override
@@ -47,44 +46,34 @@ public class BillBoardAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         MyViewHolder viewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.component_billboard, null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.list_item_billboard, parent, false);
             viewHolder = new MyViewHolder(convertView);
             convertView.setTag(viewHolder);
-
         }
+
         viewHolder = (MyViewHolder) convertView.getTag();
-
-        BillboardItem item = getItem(position);
-        viewHolder.categoryName.setText(item.getCategoryName());
-
-        int iconResId = Category.parseCategory(mContext, item.getCategoryName()).getCategoryIconResId();
-        Bitmap categoryIcon = BitmapFactory.decodeResource(mContext.getResources(), iconResId);
-        viewHolder.categoryIcon.setImageBitmap(categoryIcon);
-        viewHolder.no1.setText(item.getNo1());
-        viewHolder.no2.setText(item.getNo2());
-        viewHolder.no3.setText(item.getNo3());
-
+        VideoWithUser video = mVideos.get(position);
+        viewHolder.num.setText(position + 1 + ".");
+        Glide.with(mContext).load(video.getVideo().getVideo_wrap()).into(viewHolder.videoThumbnail);
+        viewHolder.videoName.setText(video.getVideo().getVideo_name());
+        viewHolder.videoUser.setText("By " + video.getUserInfo().getUserName());
         return convertView;
     }
 
 
-    private class MyViewHolder {
-        TextView categoryName;
-        ImageView categoryIcon;
-        TextView no1;
-        TextView no2;
-        TextView no3;
+
+
+    class MyViewHolder {
+        TextView num;
+        ImageView videoThumbnail;
+        TextView videoName;
+        TextView videoUser;
 
         public MyViewHolder(View view) {
-            categoryName = (TextView) view.findViewById(R.id.tv_video_online_category);
-            categoryIcon = (ImageView) view.findViewById(R.id.iv_billboard_category_icon);
-            no1 = (TextView) view.findViewById(R.id.tv_billboard_no1);
-            no2 = (TextView) view.findViewById(R.id.tv_billboard_no2);
-            no3 = (TextView) view.findViewById(R.id.tv_billboard_no3);
+            num = (TextView) view.findViewById(R.id.tv_billboard_number);
+            videoThumbnail = (ImageView) view.findViewById(R.id.iv_billboard_video_thumbnail);
+            videoName = (TextView) view.findViewById(R.id.tv_billboard_video_name);
+            videoUser = (TextView) view.findViewById(R.id.tv_billboard_video_user);
         }
-
-
     }
-
-
 }

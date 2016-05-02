@@ -24,11 +24,14 @@ import org.xutils.x;
 /**
  * Created by jamin on 16-5-1.
  */
-public class UserModifyUserNameFragment extends XBaseFragment {
+public class UserModifyMarksFragment extends XBaseFragment{
+
     private static final String MODIFY_CODE1 = "modify code";
 
     private EditText mModifyInfo;
     private User mUser;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +43,7 @@ public class UserModifyUserNameFragment extends XBaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_modify_user_name, null);
         mModifyInfo = (EditText) view.findViewById(R.id.et_modify_user_info);
-        mModifyInfo.setText(mUser.getUserName());
+        mModifyInfo.setText(mUser.getMarks());
         return view;
     }
 
@@ -61,9 +64,9 @@ public class UserModifyUserNameFragment extends XBaseFragment {
         confirmItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                String userName = mModifyInfo.getText().toString();
-                if (!TextUtils.isEmpty(userName)) {
-                    requestModifyUserName(userName);
+                String marks = mModifyInfo.getText().toString();
+                if (!TextUtils.isEmpty(marks)) {
+                    requestModifyUserName(marks);
                 }
                 return false;
             }
@@ -71,12 +74,11 @@ public class UserModifyUserNameFragment extends XBaseFragment {
     }
 
 
-    private void requestModifyUserName(String userName) {
-        User user = ((BaseApplication) x.app()).getUser();
+    private void requestModifyUserName(String marks) {
 
-        RequestParams requestParams = new RequestParams(BaseNetConfig.WEB_URL + "/user/user_name");
-        requestParams.addParameter("id", user.getId());
-        requestParams.addParameter("userName", userName);
+        RequestParams requestParams = new RequestParams(BaseNetConfig.WEB_URL + "/user/marks");
+        requestParams.addParameter("id", mUser.getId());
+        requestParams.addParameter("marks", marks);
         x.http().get(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -100,6 +102,4 @@ public class UserModifyUserNameFragment extends XBaseFragment {
         });
     }
 
-
 }
-
