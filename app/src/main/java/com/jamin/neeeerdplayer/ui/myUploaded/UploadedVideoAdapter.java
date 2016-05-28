@@ -106,15 +106,12 @@ public class UploadedVideoAdapter extends RecyclerView.Adapter {
     public void showOperateDialog(final int position){
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         //builder.setTitle("请选择操作");
-        builder.setItems(new CharSequence[]{"查看", "删除"},
+        builder.setItems(new CharSequence[]{ "删除"},
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
-                            case 0:		//查看操作
-                                //获得headView的个数
-                                break;
-                            case 1:	//删除操作
+                            case 0:	//删除操作
                                 //// TODO: 16-5-2 这里只是在本地删除了视频
                                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
                                 dialogBuilder.setTitle("删除");

@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -19,13 +20,16 @@ import com.jamin.neeeerdplayer.ui.MainActivity;
  */
 public class UploadService extends Service {
     private static final int NOTIFICATION_FLAG = 1;
-    public static final String UPLOAD_VIDEO_NAME = "upload video name";
+
     private RemoteViews mRemoteViews;
 
     private Handler handler = new Handler();
 
     private static int mProgress = 0;
 
+    private static final int FAKE_MAX_PROGRESS = 72;
+    NotificationManager manager;
+    Notification notify2;
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -39,14 +43,16 @@ public class UploadService extends Service {
     }
 
     private void startNotification() {
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         PendingIntent pendingIntent2 = PendingIntent.getActivity(this, 0,
                 new Intent(this, MainActivity.class), 0);
-        Notification notify2 = new Notification.Builder(this)
+
+        notify2 = new Notification.Builder(this)
                 .setSmallIcon(R.mipmap.upload_48)
-//                .setTicker("正在上传新视频")
-//                .setContentTitle("NPlayer")
-//                .setContentText("正在上传视频")
+                .setTicker("正在上传新视频")
+                .setContentTitle("NPlayer")
+                .setContentText("正在上传视频")
                 .setContentIntent(pendingIntent2)
                 .setNumber(1)
                 .build();
@@ -57,20 +63,39 @@ public class UploadService extends Service {
         manager.notify(NOTIFICATION_FLAG, notify2);
         startForeground(NOTIFICATION_FLAG, notify2);
 
-       handler.post(new Runnable() {
-           @Override
-           public void run() {
-                while (mProgress < 100) {
-                    mRemoteViews.setProgressBar(R.id.pg_upload, 100, 1, false);
-                    mProgress += 10;
+        new AsyncTask<Void, Integer, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                while (mProgress < FAKE_MAX_PROGRESS) {
+                    mProgress += 1;
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(1600);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    publishProgress(mProgress);
                 }
-           }
-       });
+
+                while (mProgress < 98) {
+                    mProgress += 1;
+                    try {
+                        Thread.sleep(5600);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    publishProgress(mProgress);
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onProgressUpdate(Integer... values) {
+                mRemoteViews.setProgressBar(R.id.pg_upload, 100, mProgress, false);
+                mRemoteViews.setTextViewText(R.id.tv_progress, "正在上传视频 " + mProgress + "%");
+                manager.notify(NOTIFICATION_FLAG, notify2);
+            }
+        }.execute();
 
     }
 }

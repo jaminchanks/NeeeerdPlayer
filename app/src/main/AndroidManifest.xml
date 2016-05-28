@@ -114,15 +114,6 @@
 
         <service android:name=".ui.service.UploadService" />
 
-        <activity
-            android:name=".testxx.Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:parentActivityName=".ui.base.SingleFragmentActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jamin.neeeerdplayer.ui.base.SingleFragmentActivity" />
-        </activity>
     </application>
 
 </manifest>

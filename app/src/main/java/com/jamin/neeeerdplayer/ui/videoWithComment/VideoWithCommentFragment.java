@@ -2,8 +2,10 @@ package com.jamin.neeeerdplayer.ui.videoWithComment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -54,6 +56,7 @@ public class VideoWithCommentFragment extends XBaseFragment {
     private Button mBtSendComment;
 
     private User mUser;
+
 
 
     public static VideoWithCommentFragment newInstance(VideoWithUser video) {
@@ -179,7 +182,15 @@ public class VideoWithCommentFragment extends XBaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_like:
-
+                if (isAlreadyLike()) {
+                    item.setIcon(R.mipmap.thumb_up_48_notyet);
+                    Toast.makeText(getActivity(), "取消点赞成功", Toast.LENGTH_SHORT).show();
+                    setAlreadyLike(false);
+                } else {
+                    item.setIcon(R.mipmap.thumb_up_48);
+                    Toast.makeText(getActivity(), "点赞成功", Toast.LENGTH_SHORT).show();
+                    setAlreadyLike(true);
+                }
                 break;
 
             case R.id.action_comment:
@@ -195,6 +206,19 @@ public class VideoWithCommentFragment extends XBaseFragment {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setAlreadyLike(boolean isLike) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(mCurrentPlayingVideo.getVideo().getVideo_id() + " is Like?", isLike);
+        editor.apply();
+    }
+
+    private boolean isAlreadyLike() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        boolean isLike = preferences.getBoolean(mCurrentPlayingVideo.getVideo().getVideo_id() + " is Like?", false);
+        return isLike;
     }
 
     private void requestAddComment() {
