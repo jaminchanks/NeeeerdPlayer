@@ -1,8 +1,7 @@
-package com.jamin.neeeerdplayer.ui.video_comment;
+package com.jamin.neeeerdplayer.ui.videoWithComment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -192,9 +191,6 @@ public class VideoWithCommentFragment extends XBaseFragment {
                     addCommentLayout.setVisibility(View.GONE);
                     isCommentLayoutShow = false;
                 }
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-
                 break;
         }
 

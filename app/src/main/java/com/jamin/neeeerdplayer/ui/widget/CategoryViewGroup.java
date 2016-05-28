@@ -44,7 +44,6 @@ public class CategoryViewGroup extends FrameLayout {
     public void loadData(ArrayList<CategoryItem> categoryItems) {
         mRecyclerView.setAdapter(new MyRecycleAdapter(categoryItems));
         mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 3));
-
     }
 
 
@@ -68,7 +67,6 @@ public class CategoryViewGroup extends FrameLayout {
             CategoryItem item = mCategories.get(position);
             holder.image.setImageBitmap(item.getIcon());
             holder.title.setText(item.getTitle());
-            //// TODO: 16-3-10  稍后补充点击事件
         }
 
         @Override

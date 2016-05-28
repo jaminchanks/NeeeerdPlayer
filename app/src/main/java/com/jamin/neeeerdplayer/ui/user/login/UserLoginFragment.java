@@ -20,7 +20,7 @@ import com.jamin.neeeerdplayer.bean.User;
 import com.jamin.neeeerdplayer.config.BaseNetConfig;
 import com.jamin.neeeerdplayer.ui.MainActivity;
 import com.jamin.neeeerdplayer.ui.base.BaseApplication;
-import com.jamin.neeeerdplayer.config.NetConfig;
+import com.jamin.neeeerdplayer.config.PreferensConfig;
 import com.jamin.neeeerdplayer.ui.base.XBaseFragment;
 import com.jamin.neeeerdplayer.utils.StringUtils;
 
@@ -50,6 +50,7 @@ public class UserLoginFragment extends XBaseFragment {
 
     private static final String EMAIL_PARAM = "email";
     private static final String PASSWORD_PARAM = "password";
+    private static final String ACCOUNT_NO_FOUND = "no user found";
     private ProgressDialog progressDialog;
 
 
@@ -134,14 +135,19 @@ public class UserLoginFragment extends XBaseFragment {
         x.http().post(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
+                if (result.equals(ACCOUNT_NO_FOUND)) {
+                    Toast.makeText(getActivity(), "账号或密码错误", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Gson gson = new Gson();
                 User user = gson.fromJson(result, User.class);
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(x.app());
                 SharedPreferences.Editor editor = preferences.edit();
 
                 //把这两个重要信息放入本地中，表示用户已经登陆过了
-                editor.putInt(NetConfig.UID, user.getId());
-                editor.putString(NetConfig.USER_INFO, result);
+                editor.putInt(PreferensConfig.UID, user.getId());
+                editor.putString(PreferensConfig.USER_INFO, result);
 
                 //把用户的基本信息保存在本地
                 Log.i("user_saved_info", user.toString());
@@ -156,8 +162,6 @@ public class UserLoginFragment extends XBaseFragment {
 
                 startActivity(intent);
                 getActivity().finish();
-                //// TODO: 16-4-7
-                Toast.makeText(getActivity(), EMAIL_PARAM + PASSWORD_PARAM, Toast.LENGTH_SHORT).show();
                 
             }
 
@@ -168,19 +172,16 @@ public class UserLoginFragment extends XBaseFragment {
                 } else {
                     ex.printStackTrace();
                 }
-                Toast.makeText(x.app(), "onError", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-                Toast.makeText(x.app(), "onCancel", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
 
             @Override
             public void onFinished() {
-                Toast.makeText(x.app(), "onFinish", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
         });

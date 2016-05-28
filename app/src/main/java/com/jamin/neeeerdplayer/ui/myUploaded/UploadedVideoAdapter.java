@@ -1,10 +1,10 @@
-package com.jamin.neeeerdplayer.ui.uploaded;
+package com.jamin.neeeerdplayer.ui.myUploaded;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.VideoWithUser;
+import com.jamin.neeeerdplayer.ui.videoWithComment.VideoWithCommentActivity;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class UploadedVideoAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         MyViewHolder viewHolder = (MyViewHolder)holder;
-        VideoWithUser video = mVideos.get(position);
+        final VideoWithUser video = mVideos.get(position);
         Glide.with(mContext).load(video.getVideo().getVideo_wrap()).into(viewHolder.thumbnail);
         viewHolder.title.setText(video.getVideo().getVideo_name());
         viewHolder.playTimes.setText(String.valueOf(video.getVideo().getWatch_numbers()));
@@ -50,6 +51,16 @@ public class UploadedVideoAdapter extends RecyclerView.Adapter {
             public boolean onLongClick(View v) {
                 showOperateDialog(position);
                 return false;
+            }
+        });
+
+        viewHolder.getItemView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra(VideoWithCommentActivity.VIDEO_WITH_COMMENT_SELECTED, video);
+                intent.setClass(mContext, VideoWithCommentActivity.class);
+                mContext.startActivity(intent);
             }
         });
     }

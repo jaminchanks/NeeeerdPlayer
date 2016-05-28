@@ -7,6 +7,7 @@
     android:padding="16dp"
     android:clickable="true"
     android:background="@drawable/selector_category_item"
+    android:id="@+id/ly_category_item"
     >
     <ImageView
         android:id="@+id/iv_category_icon"

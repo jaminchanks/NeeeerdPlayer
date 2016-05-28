@@ -1,5 +1,8 @@
 package com.jamin.neeeerdplayer.ui.local;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -8,11 +11,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
 import com.jamin.neeeerdplayer.ui.player.PlayerActivity;
+import com.jamin.neeeerdplayer.ui.upload.UploadDialogFragment;
 import com.jamin.neeeerdplayer.utils.VideoUtils;
 
 import java.util.ArrayList;
@@ -27,7 +32,8 @@ public class VideoListFragment extends ListFragment {
     public static final String SELECTED_VIDEO = "selected Video";
 
 
-    ArrayList<FooVideo> mVideoList;
+    private ArrayList<FooVideo> mVideoList;
+    private Activity mActivity;
 
     public static VideoListFragment newInstance(ArrayList<FooVideo> list) {
         Bundle args = new Bundle();
@@ -51,14 +57,23 @@ public class VideoListFragment extends ListFragment {
         setHasOptionsMenu(true);
         mVideoList = (ArrayList<FooVideo>) getArguments().getSerializable(VIDEO_LIST);
         setListAdapter(new VideoAdapter(getActivity(), mVideoList));
+
+        mActivity = getActivity();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         getListView().setDivider(null);
-
         String upperDirectorName = VideoUtils.getSimperUpperDirectorName(mVideoList.get(0).getVideoPath());
         getActivity().setTitle(upperDirectorName);
+
+        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showUploadOptions(position);
+                return true;
+            }
+        });
     }
 
 
@@ -80,32 +95,29 @@ public class VideoListFragment extends ListFragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.main, menu);
         menu.findItem(R.id.action_refresh).setVisible(true);
-
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        switch (id) {
-//            case R.id.action_refresh:
-//
-//                return true;
-//            case R.id.action_search:
-//                return true;
-//
-//            case R.id.action_settings:
-//                return true;
-//
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
 
-
-
-
+    private void showUploadOptions(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        //builder.setTitle("请选择操作");
+        builder.setTitle("选择操作")
+                .setItems(new CharSequence[]{"上传该视频"},
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                            case 1:	//删除操作
+                                UploadDialogFragment dialogFragment = UploadDialogFragment.getInstance(mVideoList.get(position));
+                                dialogFragment.show(getActivity().getSupportFragmentManager(), "dialog");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

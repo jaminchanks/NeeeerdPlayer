@@ -50,6 +50,9 @@ public class VideoAdapter extends ArrayAdapter<FooVideo>{
 
         viewHolder.displayNameView.setText(displayName);
         viewHolder.durationView.setText(VideoUtils.timeFormat(fooVideo.getDuration()));
+
+
+
         return convertView;
     }
 

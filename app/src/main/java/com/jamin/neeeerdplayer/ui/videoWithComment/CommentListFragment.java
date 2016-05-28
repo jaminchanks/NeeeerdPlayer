@@ -1,4 +1,4 @@
-package com.jamin.neeeerdplayer.ui.video_comment;
+package com.jamin.neeeerdplayer.ui.videoWithComment;
 
 
 import android.content.BroadcastReceiver;
@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,7 +22,6 @@ import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.CommentWithUser;
 import com.jamin.neeeerdplayer.config.BaseNetConfig;
 import com.jamin.neeeerdplayer.ui.base.XBaseFragment;
-import com.jamin.neeeerdplayer.utils.DensityUtils;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -62,6 +61,10 @@ public class CommentListFragment extends XBaseFragment{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_comment_list, null);
         mListView = (ListView) view.findViewById(R.id.lv_comments);
+        LinearLayout emptyView = (LinearLayout) view.findViewById(R.id.empty_view);
+        (emptyView.findViewById(R.id.empty_view_icon)).setBackgroundResource(R.mipmap.no_comment_96);
+        ((TextView) emptyView.findViewById(R.id.empty_view_title)).setText("就等你来评论啦~");
+        mListView.setEmptyView(emptyView);
 
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.layout_refresh);
         setRefreshLayoutSetting();
@@ -113,7 +116,10 @@ public class CommentListFragment extends XBaseFragment{
                 comments.addAll(commentWithUsers1);
                 mCommentAdapter.notifyDataSetChanged();
                 Log.i("获取评论", "成功" + mVideoId);
-                refreshLayout.setRefreshing(false);
+
+                if (refreshLayout.isRefreshing()) {
+                    refreshLayout.setRefreshing(false);
+                }
             }
 
             @Override
@@ -143,13 +149,10 @@ public class CommentListFragment extends XBaseFragment{
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshLayout.setRefreshing(true);
                 new Handler().post(new Runnable() {
                     @Override
                     public void run() {
                         requestForComment();
-                        if (refreshLayout.isRefreshing())
-                            refreshLayout.setRefreshing(false);
                     }
                 });
             }

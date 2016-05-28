@@ -20,6 +20,4 @@ public class UserInfoActivity extends SingleFragmentActivity{
         User user = ((BaseApplication)getApplication()).getUser();
         return UserInfoFragment.newInstance(user);
     }
-
-
 }

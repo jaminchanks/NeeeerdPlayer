@@ -40,7 +40,6 @@ public class BasePathConfig {
                     } else {
                         APP_DIR = CACHE_DIR;
                     }
-
                 }
             }
             return sInstance;
@@ -56,7 +55,8 @@ public class BasePathConfig {
         String internalPath = "";
         for(String mountPth : mountList){
             File dictory = new File(mountPth);
-            if(dictory.isDirectory()&& dictory.canWrite() && dictory.canRead() && dictory.canExecute()){
+            if(dictory.isDirectory()&& dictory.canWrite()
+                    && dictory.canRead() && dictory.canExecute()){
                 internalPath = dictory.getAbsolutePath();
                 break;
             }

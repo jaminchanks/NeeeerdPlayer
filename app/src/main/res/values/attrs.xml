@@ -11,4 +11,18 @@
     </declare-styleable>
 
 
+    <string-array name="category">
+        <item>--选择视频分类--</item>
+        <item>科技</item>
+        <item>动漫</item>
+        <item>文学</item>
+        <item>音乐</item>
+        <item>情感</item>
+        <item>舞蹈</item>
+        <item>运动</item>
+        <item>时尚</item>
+        <item>娱乐</item>
+    </string-array>
+    
+    
 </resources>

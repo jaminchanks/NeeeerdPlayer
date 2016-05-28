@@ -3,6 +3,7 @@ package com.jamin.neeeerdplayer.ui.user.friends;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -165,6 +166,19 @@ public class FriendInfoFragment extends XBaseFragment implements View.OnClickLis
                 .load(avatarUri)
                 .transform(new GlideCircleTransform(mGetActivity))
                 .into(mIvAvatar);
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //判断是不是自己
+        User user =  ((BaseApplication)x.app()).getUser();
+        if (mUserInfo != null && user != null) {
+            if (mUserInfo.getUserId() == user.getId()) {
+                mMenuItem.setVisible(false);
+            }
+        }
     }
 
     private void setOnClickListener() {

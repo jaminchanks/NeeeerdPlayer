@@ -1,4 +1,4 @@
-package com.jamin.neeeerdplayer.ui.video_comment;
+package com.jamin.neeeerdplayer.ui.videoWithComment;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,11 +12,8 @@ import com.bumptech.glide.Glide;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.Comment;
 import com.jamin.neeeerdplayer.bean.CommentWithUser;
-import com.jamin.neeeerdplayer.bean.User;
 import com.jamin.neeeerdplayer.bean.UserInfo;
 import com.jamin.neeeerdplayer.ui.widget.GlideCircleTransform;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

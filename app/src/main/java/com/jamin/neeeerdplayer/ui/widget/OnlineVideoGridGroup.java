@@ -14,7 +14,7 @@ import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.VideoWithUser;
 import com.jamin.neeeerdplayer.ui.base.Category;
 import com.jamin.neeeerdplayer.ui.mainPage.OnlineVideoGridAdapter;
-import com.jamin.neeeerdplayer.ui.video_comment.VideoWithCommentActivity;
+import com.jamin.neeeerdplayer.ui.videoWithComment.VideoWithCommentActivity;
 
 import java.util.List;
 
@@ -62,7 +62,7 @@ public class OnlineVideoGridGroup extends FrameLayout{
              @Override
              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                  Intent intent = new Intent();
-                 intent.putExtra(VIDEO_WITH_COMMENT_SELECTED, videos.get(position));
+                 intent.putExtra(VideoWithCommentActivity.VIDEO_WITH_COMMENT_SELECTED, videos.get(position));
                  intent.setClass(mContext, VideoWithCommentActivity.class);
                  mContext.startActivity(intent);
              }

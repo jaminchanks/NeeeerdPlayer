@@ -19,8 +19,6 @@ public class VideoManager {
         mContext = context;
     }
 
-
-
     public ArrayList<FooVideo> queryAllVideos() {
         ArrayList<FooVideo> videos = null;
 
@@ -36,7 +34,8 @@ public class VideoManager {
                 MediaStore.Video.Media.SIZE,
                 MediaStore.Video.Media.DURATION};
 
-        Cursor cursor = mContext.getContentResolver().query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+        Cursor cursor = mContext.getContentResolver().query(
+                MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
                 mediaColumns, null, null, null);
         if (null != cursor) {
             videos = new ArrayList<>();

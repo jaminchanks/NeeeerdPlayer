@@ -1,51 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly_refresh_commend"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="none"
-    >
-    <LinearLayout
+    android:layout_height="match_parent">
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:scrollbars="none"
         >
-        <!-- 图片轮播 -->
-        <com.jamin.neeeerdplayer.ui.widget.AutoSlideBoxView
-            android:id="@+id/cycle_view_test"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <!-- 图片轮播 -->
+            <com.jamin.neeeerdplayer.ui.widget.AutoSlideBoxView
+                android:id="@+id/cycle_view_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <!--<com.jamin.neeeerdplayer.ui.widget.OnlineVideoGridGroup-->
-            <!--android:id="@+id/online_video_group1"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:paddingLeft="@dimen/activity_default_margin"-->
-            <!--android:paddingRight="@dimen/activity_default_margin"-->
-            <!--/>-->
+            <com.jamin.neeeerdplayer.ui.widget.NotScrollListView
+                android:id="@+id/lv_commend_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <!--<com.jamin.neeeerdplayer.ui.widget.OnlineVideoGridGroup-->
-            <!--android:id="@+id/online_video_group2"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:paddingLeft="@dimen/activity_default_margin"-->
-            <!--android:paddingRight="@dimen/activity_default_margin"-->
-            <!--/>-->
+            <include layout="@layout/empty_view" />
 
-        <!--<com.jamin.neeeerdplayer.ui.widget.OnlineVideoGridGroup-->
-            <!--android:id="@+id/online_video_group3"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:paddingLeft="@dimen/activity_default_margin"-->
-            <!--android:paddingRight="@dimen/activity_default_margin"-->
-            <!--/>-->
+        </LinearLayout>
+    </ScrollView>
 
-        <com.jamin.neeeerdplayer.ui.widget.NotScrollListView
-            android:id="@+id/lv_commend_video"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
-    </LinearLayout>
-</ScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>

@@ -19,16 +19,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.FooVideo;
 import com.jamin.neeeerdplayer.bean.User;
+import com.jamin.neeeerdplayer.ui.about.AboutActivity;
 import com.jamin.neeeerdplayer.ui.base.BaseApplication;
 import com.jamin.neeeerdplayer.ui.base.HomePage;
 import com.jamin.neeeerdplayer.ui.local.FolderListActivity;
-import com.jamin.neeeerdplayer.ui.uploaded.UploadedActivity;
+import com.jamin.neeeerdplayer.ui.myUploaded.UploadedActivity;
 import com.jamin.neeeerdplayer.ui.user.info.UserInfoActivity;
 import com.jamin.neeeerdplayer.ui.widget.GlideCircleTransform;
 
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity
 
         //// TODO: 16-4-7 仅是测试, 获取头像
         Glide.with(this).load(avatarUri).transform(new GlideCircleTransform(this))
-                .placeholder(R.mipmap.default_image).into(mIvAvatar);
+                .into(mIvAvatar);
         mTxUserName.setText(mUser.getUserName());
         mTxUserMarks.setText(mUser.getMarks());
     }
@@ -181,15 +181,15 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_upload_video:
                 clazz = UploadedActivity.class;
                 break;
-            case R.id.nav_message:
-
-                break;
-            case R.id.nav_setting:
-
-                break;
+//            case R.id.nav_message:
+//
+//                break;
+//            case R.id.nav_setting:
+//
+//                break;
 
             case R.id.nav_about_us:
-
+                clazz = AboutActivity.class;
                 break;
 
             default:
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
-        viewPager.setCurrentItem(0);
+//        viewPager.setCurrentItem(0);
         MenuItem menuItem= navigationView.getMenu().findItem(R.id.nav_online_video);
         menuItem.setChecked(true);
         mUser = ((BaseApplication)getApplication()).getUser();

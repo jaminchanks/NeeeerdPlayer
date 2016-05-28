@@ -1,15 +1,20 @@
 package com.jamin.neeeerdplayer.ui.mainPage;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -19,6 +24,7 @@ import com.jamin.neeeerdplayer.config.BaseNetConfig;
 import com.jamin.neeeerdplayer.ui.widget.AutoSlideBoxView;
 import com.jamin.neeeerdplayer.ui.widget.NotScrollListView;
 import com.jamin.neeeerdplayer.ui.widget.OnlineVideoGridGroup;
+import com.jamin.neeeerdplayer.utils.NetUtils;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -32,12 +38,20 @@ import java.util.List;
  * Created by jamin on 16-3-8.
  */
 public class CommendFragment extends Fragment{
-    List<List<VideoWithUser>> videoLists = new ArrayList<>();
-    NotScrollListView noScrollGridView;
-    CommendVideoAdapter commendVideoAdapter;
+    private List<List<VideoWithUser>> videoLists = new ArrayList<>();
+    private NotScrollListView noScrollGridView;
+    private CommendVideoAdapter commendVideoAdapter;
+    private SwipeRefreshLayout refreshLayout;
+    private AnimationDrawable animationDrawable;
+
     @Override
     public void onCreate(Bundle onSavedInstanceState) {
         super.onCreate(onSavedInstanceState);
+
+        animationDrawable = new AnimationDrawable();
+        animationDrawable.addFrame(getActivity().getResources().getDrawable(R.mipmap.loading_96_01), 300);
+        animationDrawable.addFrame(getActivity().getResources().getDrawable(R.mipmap.loading_96_02), 300);
+        animationDrawable.addFrame(getActivity().getResources().getDrawable(R.mipmap.loading_96_03), 300);
     }
 
 
@@ -51,9 +65,10 @@ public class CommendFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         initImageCycleView(view);
         initOnlineVideos(view);
+
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.ly_refresh_commend);
+        setRefreshLayoutSetting();
     }
-
-
 
     //// TODO: 16-3-8 暂做测试 轮播
     private void initImageCycleView(View view) {
@@ -76,6 +91,47 @@ public class CommendFragment extends Fragment{
         });
 
         autoSlideBoxView.setCycleDelayed(5000);
+
+        noScrollGridView = (NotScrollListView) view.findViewById(R.id.lv_commend_video);
+        LinearLayout emptyView = (LinearLayout) view.findViewById(R.id.empty_view);
+
+        if (NetUtils.isNetworkAvailable(getActivity())) {
+            ImageView emptyViewIcon = (ImageView) emptyView.findViewById(R.id.empty_view_icon);
+            emptyViewIcon.setBackground(animationDrawable);
+            animationDrawable.setOneShot(false);
+            animationDrawable.start();
+            ((TextView) emptyView.findViewById(R.id.empty_view_title)).setText("正在加载中...");
+        } else  {
+            (emptyView.findViewById(R.id.empty_view_icon)).setBackgroundResource(R.mipmap.no_wifi_96);
+            ((TextView) emptyView.findViewById(R.id.empty_view_title)).setText("没有网络~");
+        }
+        noScrollGridView.setEmptyView(emptyView);
+        commendVideoAdapter = new CommendVideoAdapter(getActivity(),  videoLists);
+        noScrollGridView.setAdapter(commendVideoAdapter);
+    }
+
+
+
+    /**
+     * 下拉刷新设置
+     * */
+    private void setRefreshLayoutSetting() {
+        //设置刷新时动画的颜色，可以设置4个
+        refreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.setRefreshing(true);
+                //模拟刷新数据
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (refreshLayout.isRefreshing())
+                            refreshLayout.setRefreshing(false);
+                    }
+                }, 1500);
+            }
+        });
     }
 
 
@@ -84,7 +140,7 @@ public class CommendFragment extends Fragment{
      * @param view
      */
     private void initOnlineVideos(View view) {
-       //从网络上获取推荐视频内容
+        //从网络上获取推荐视频内容
         RequestParams params = new RequestParams(BaseNetConfig.WEB_URL + "/video/commend");
         List< List<VideoWithUser>> videoWithUser;
 
@@ -97,6 +153,7 @@ public class CommendFragment extends Fragment{
                 videoLists.clear();
                 videoLists.addAll(videos1);
                 commendVideoAdapter.notifyDataSetChanged();
+                animationDrawable.stop();
             }
 
             @Override
@@ -114,12 +171,6 @@ public class CommendFragment extends Fragment{
                 Log.i("commend_video", "finish");
             }
         });
-
-
-        noScrollGridView = (NotScrollListView) view.findViewById(R.id.lv_commend_video);
-
-        commendVideoAdapter = new CommendVideoAdapter(getActivity(),  videoLists);
-        noScrollGridView.setAdapter(commendVideoAdapter);
 
     }
 
@@ -172,5 +223,5 @@ public class CommendFragment extends Fragment{
             onlineVideoGridGroup = (OnlineVideoGridGroup) view.findViewById(R.id.online_video_grid_group);
         }
     }
-    
+
 }

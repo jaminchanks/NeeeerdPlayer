@@ -131,4 +131,29 @@ public enum Category {
         }
     }
 
+    public int toInt() {
+        switch (this) {
+            case TECHNOLOGY:
+                return 1;
+            case COMIC:
+                return 2;
+            case LITERATURE:
+                return 3;
+            case MUSIC:
+                return 4;
+            case EMOTION:
+                return 5;
+            case DANCING:
+                return 6;
+            case EXERCISE:
+                return 7;
+            case FASHION:
+                return 8;
+            case FUNNY:
+                return 9;
+            default:
+                throw new RuntimeException("No such Category");
+        }
+    }
+
 }

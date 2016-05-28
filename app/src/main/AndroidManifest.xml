@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jamin.neeeerdplayer">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -13,96 +13,116 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".ui.SplashActivity"
-            android:theme="@style/NoTitleTheme"
-            >
+        <activity
+            android:name=".ui.SplashActivity"
+            android:theme="@style/NoTitleTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.user.login.UserRegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+        <activity
+            android:name=".ui.user.login.UserRegisterActivity"
             android:launchMode="singleTop"
-            >
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.user.login.UserLoginActivity" />
         </activity>
-
-        <activity android:name=".ui.user.login.UserLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+        <activity
+            android:name=".ui.user.login.UserLoginActivity"
             android:launchMode="singleTop"
-            >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
 
-            <meta-data android:name="android.app.searchable"
+            <meta-data
+                android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
-        <activity android:name=".ui.player.PlayerActivity"
+        <activity
+            android:name=".ui.player.PlayerActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="landscape"
-            android:theme="@style/NoTitleTheme"
-            android:launchMode="singleTop" />
-
-        <activity android:name=".ui.local.VideoListActivity"
-            android:launchMode="singleTop" >
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:theme="@style/NoTitleTheme" />
+        <activity
+            android:name=".ui.local.VideoListActivity"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.local.FolderListActivity" />
         </activity>
-
-        <activity android:name=".ui.local.FolderListActivity"
-            android:launchMode="singleTop" >
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
+        <activity
+            android:name=".ui.local.FolderListActivity"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.user.info.UserInfoActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTop" />
-
-
-        <activity android:name=".ui.video_comment.VideoWithCommentActivity"
+        <activity
+            android:name=".ui.user.info.UserInfoActivity"
             android:launchMode="singleTop"
-            >
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.videoWithComment.VideoWithCommentActivity"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
         </activity>
-
-        <activity android:name=".ui.user.login.LostPasswordActivity" >
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
+        <activity android:name=".ui.user.login.LostPasswordActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.user.login.UserLoginActivity" />
         </activity>
-
         <activity android:name=".ui.user.modify.UserModifyActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.user.info.UserInfoActivity" />
         </activity>
-
-        <activity android:name=".ui.uploaded.UploadedActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
+        <activity android:name=".ui.myUploaded.UploadedActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
+        <activity android:name=".ui.user.friends.FriendListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.user.info.UserInfoActivity" />
+        </activity>
+        <activity
+            android:name=".ui.user.friends.FriendInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.category.VideoInCategoryActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
+        <activity android:name=".ui.about.AboutActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
         </activity>
 
-        <activity android:name=".ui.user.friends.FriendListActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.user.info.UserInfoActivity" />
-        </activity>
+        <service android:name=".ui.service.UploadService" />
 
-        <activity android:name=".ui.user.friends.FriendInfoActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+        <activity
+            android:name=".testxx.Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:parentActivityName=".ui.base.SingleFragmentActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jamin.neeeerdplayer.ui.base.SingleFragmentActivity" />
         </activity>
-
     </application>
 
 </manifest>

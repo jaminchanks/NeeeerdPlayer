@@ -3,8 +3,7 @@ package com.jamin.neeeerdplayer.config;
 /**
  * Created by jamin on 16-4-4.
  */
-public class NetConfig {
-    public static final String USER_LOGIN_URL = BaseNetConfig.WEB_URL + "/user/login";
+public class PreferensConfig {
 
     public static final String USER_INFO = "user_info";
 
@@ -13,6 +12,6 @@ public class NetConfig {
 
     public static final String UID = "id";
 
-
+    public static final String LOGIN_USER_RELATIONSHIP = "user relationship";
 
 }

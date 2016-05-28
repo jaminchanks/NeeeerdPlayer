@@ -1,9 +1,11 @@
 package com.jamin.neeeerdplayer.ui.mainPage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.VideoWithUser;
+import com.jamin.neeeerdplayer.ui.videoWithComment.VideoWithCommentActivity;
 
 import java.util.List;
 
@@ -43,7 +46,7 @@ public class BillBoardAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         MyViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.list_item_billboard, parent, false);
@@ -52,11 +55,21 @@ public class BillBoardAdapter extends BaseAdapter {
         }
 
         viewHolder = (MyViewHolder) convertView.getTag();
-        VideoWithUser video = mVideos.get(position);
+        final VideoWithUser video = mVideos.get(position);
         viewHolder.num.setText(position + 1 + ".");
         Glide.with(mContext).load(video.getVideo().getVideo_wrap()).into(viewHolder.videoThumbnail);
         viewHolder.videoName.setText(video.getVideo().getVideo_name());
         viewHolder.videoUser.setText("By " + video.getUserInfo().getUserName());
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra(VideoWithCommentActivity.VIDEO_WITH_COMMENT_SELECTED, video);
+                intent.setClass(mContext, VideoWithCommentActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
+
         return convertView;
     }
 

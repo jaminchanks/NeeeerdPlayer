@@ -22,7 +22,6 @@
     <dimen name="folder_is_new">10sp</dimen>
 
 
-
     <!-- 本地视频缩略图和字体大小 -->
     <dimen name="video_thumbnail_local_height">72dp</dimen>
     <dimen name="video_thumbnail_local_width">96dp</dimen>
@@ -39,7 +38,6 @@
     <dimen name="video_category_title_margin_top">10dp</dimen>
     <dimen name="video_category_title_margin_bottom">5dp</dimen>
     <dimen name="video_category_title_font">16sp</dimen>
-
 
 
     <!-- 在线视频视图模块 -->

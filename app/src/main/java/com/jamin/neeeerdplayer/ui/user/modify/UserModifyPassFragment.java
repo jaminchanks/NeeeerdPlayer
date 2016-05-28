@@ -15,7 +15,7 @@ import android.widget.EditText;
 import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.User;
 import com.jamin.neeeerdplayer.config.BaseNetConfig;
-import com.jamin.neeeerdplayer.config.NetConfig;
+import com.jamin.neeeerdplayer.config.PreferensConfig;
 import com.jamin.neeeerdplayer.ui.base.BaseApplication;
 import com.jamin.neeeerdplayer.ui.base.XBaseFragment;
 import com.jamin.neeeerdplayer.ui.user.login.UserLoginActivity;
@@ -90,7 +90,7 @@ public class UserModifyPassFragment  extends XBaseFragment implements View.OnCli
                 //清除已登陆信息
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putInt(NetConfig.UID, -1);
+                editor.putInt(PreferensConfig.UID, -1);
                 editor.apply();
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), UserLoginActivity.class);

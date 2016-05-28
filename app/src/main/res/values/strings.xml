@@ -15,7 +15,7 @@
 
     <!--侧边栏选项-->
     <string name="online_video">在线观看</string>
-    <string name="offline_video">离线视频</string>
+    <string name="offline_video">本地视频</string>
     <string name="uploaded_video">已发布视频</string>
     <string name="message">消息</string>
     <string name="setting">设置</string>
@@ -75,4 +75,5 @@
 
     <!-- 其他 -->
     <string name="see_more">查看更多</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

@@ -34,7 +34,7 @@ import com.jamin.neeeerdplayer.R;
 import com.jamin.neeeerdplayer.bean.User;
 import com.jamin.neeeerdplayer.bean.UserRelationship;
 import com.jamin.neeeerdplayer.config.BaseNetConfig;
-import com.jamin.neeeerdplayer.config.NetConfig;
+import com.jamin.neeeerdplayer.config.PreferensConfig;
 import com.jamin.neeeerdplayer.ui.base.BaseApplication;
 import com.jamin.neeeerdplayer.ui.base.BasePathConfig;
 import com.jamin.neeeerdplayer.ui.user.friends.FriendListActivity;
@@ -225,7 +225,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener{
                 //清除已登陆信息
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mGetActivity);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putInt(NetConfig.UID, -1);
+                editor.putInt(PreferensConfig.UID, -1);
                 editor.apply();
                 intent = new Intent();
                 intent.setClass(mGetActivity, UserLoginActivity.class);
@@ -384,7 +384,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener{
         String imagePath = BasePathConfig.getInstance().getImageDiskCacheDir() + File.separator + imageName;
 
         RequestParams params = new RequestParams(BaseNetConfig.WEB_URL + "/user/avatar");
-        params.addParameter("id", 1);
+        params.addParameter("id", mUser.getId());
         params.addBodyParameter("avatar", new File(imagePath));
         params.setMultipart(true);
         x.http().post(params, new Callback.CommonCallback<String>() {
@@ -452,8 +452,8 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener{
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(x.app());
         SharedPreferences.Editor editor = preferences.edit();
         //把这两个重要信息放入本地中，表示用户已经登陆过了
-        editor.putInt(NetConfig.UID, mUser.getId());
-        editor.putString(NetConfig.USER_INFO, new Gson().toJson(mUser));
+        editor.putInt(PreferensConfig.UID, mUser.getId());
+        editor.putString(PreferensConfig.USER_INFO, new Gson().toJson(mUser));
         editor.apply();
     }
 

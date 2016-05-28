@@ -6,11 +6,9 @@
 
     >
 
-    <com.jamin.neeeerdplayer.ui.widget.CategoryViewGroup
-        android:id="@+id/category_group"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_category"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </com.jamin.neeeerdplayer.ui.widget.CategoryViewGroup>
-
+        android:layout_height="match_parent"
+        />
 </LinearLayout>

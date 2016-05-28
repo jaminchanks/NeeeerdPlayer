@@ -126,14 +126,10 @@ public class UserRegisterFragment extends XBaseFragment implements View.OnClickL
             }
 
             @Override
-            public void onCancelled(CancelledException cex) {
-                Toast.makeText(getActivity(), "注册失败", Toast.LENGTH_SHORT).show();
-            }
+            public void onCancelled(CancelledException cex) { }
 
             @Override
             public void onFinished() {
-                Toast.makeText(getActivity(), "注册失败", Toast.LENGTH_SHORT).show();
-
             }
         });
     }

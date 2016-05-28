@@ -56,11 +56,13 @@ public class PlayerFragment extends Fragment {
         mVideoView = (VideoView)view.findViewById(R.id.video_player);
         //横屏情况下改变videoView至全屏大小
         Configuration configuration = getActivity().getResources().getConfiguration();
-       if (Configuration.ORIENTATION_LANDSCAPE == configuration.orientation) {
-           Toast.makeText(getActivity(), "横屏", Toast.LENGTH_SHORT).show();
-           mVideoView.getLayoutParams().width = ScreenUtils.getScreenWidth(getActivity());
-           mVideoView.getLayoutParams().height = ScreenUtils.getScreenHeight(getActivity()) + 20;
-       }
+        if (Configuration.ORIENTATION_LANDSCAPE == configuration.orientation) {
+            Toast.makeText(getActivity(), "横屏", Toast.LENGTH_SHORT).show();
+            mVideoView.getLayoutParams().width = ScreenUtils
+                    .getScreenWidth(getActivity());
+            mVideoView.getLayoutParams().height = ScreenUtils
+                    .getScreenHeight(getActivity()) + 20;
+        }
 
 
         mCurrentPlayingVideo = (FooVideo) getArguments().getSerializable(CURRENT_PLAY_VIDEO);
@@ -75,7 +77,7 @@ public class PlayerFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (mVideoPlayedTime != 0)
-        mVideoView.seekTo(mVideoPlayedTime);
+            mVideoView.seekTo(mVideoPlayedTime);
     }
 
 
